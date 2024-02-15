@@ -1,5 +1,19 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+devtools::load_all()
+```
 
 # jpaccidents
 
@@ -7,8 +21,7 @@
 <!-- badges: end -->
 
 jpaccidents is package for handling the traffic accident data in Japan.
-This package covers the traffic accident data provided by the [National
-Police Agency of Japan](https://www.npa.go.jp/english/index.html).
+This package covers the traffic accident data provided by the [National Police Agency of Japan](https://www.npa.go.jp/english/index.html).
 
 > jpaccidentsは日本の交通事故のデータを扱うためのパッケージです。
 > このパッケージでは、[警察庁](https://www.npa.go.jp/index.html)が提供する交通事故データを対象としています。
@@ -30,7 +43,7 @@ Load the package as follows:
 
 > パッケージを以下のようにして読み込みます。
 
-``` r
+```{r load_library, eval=FALSE}
 library(jpaccidents)
 ```
 
@@ -38,14 +51,14 @@ The traffic accident data can be used follows:
 
 > 交通事故のデータは次のようにして利用することができます。
 
-``` r
+```{r download_data, eval=FALSE}
 downloaded_path <- download_accident_main_data(download_dir = "download-dir-path", year = 2022)
 main_data <- read_accident_main_data(downloaded_path)
 ```
 
-There are three types of traffic accident data: main (honhyo), sub
-(hojyuhyo), and highway (kosokuhyo) data. The package provides functions
-for each of these. Use the function appropriate for the data you need.
+There are three types of traffic accident data: main (honhyo), sub (hojyuhyo), and highway (kosokuhyo) data.
+The package provides functions for each of these.
+Use the function appropriate for the data you need.
 See also `? download_accident_main_data` for more information.
 
 > 交通事故のデータは本票、補充票、高速票の3種類があります。
@@ -55,17 +68,14 @@ See also `? download_accident_main_data` for more information.
 
 ## License
 
-This project is licensed under the [Creative Commons Attribution 4.0
-International License](https://creativecommons.org/licenses/by/4.0/).
+This project is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
-> このプロジェクトは[クリエイティブ・コモンズ 表示 4.0 国際
-> ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)に従います。
+> このプロジェクトは[クリエイティブ・コモンズ 表示 4.0 国際 ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)に従います。
 
 ## Code of Conduct
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
 > このプロジェクトは[行動規範](CODE_OF_CONDUCT.md)を設けています。
 > したがって、このプロジェクトでは参加者にこの行動規範に従うことを求めます。
