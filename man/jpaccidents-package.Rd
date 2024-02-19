@@ -4,20 +4,12 @@
 \name{jpaccidents-package}
 \alias{jpaccidents}
 \alias{jpaccidents-package}
-<<<<<<< HEAD
-\title{jpaccidents: What the Package Does (One Line, Title Case)}
-=======
 \title{jpaccidents: Tools for Traffic Accident Data in Japan}
->>>>>>> gitlab/main
 \description{
 What the package does (one paragraph).
 }
 \author{
-<<<<<<< HEAD
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
-=======
 \strong{Maintainer}: Keisuke ANDO \email{ando@maslab.aitech.ac.jp}
->>>>>>> gitlab/main
 
 }
 \keyword{internal}
