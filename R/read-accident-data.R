@@ -88,12 +88,13 @@ extract_accident_data <- function(main_raw_data) {
 
 extract_party_a_data <- function(main_raw_data) {
   party_a_data <- main_raw_data |>
+    mutate(sub_id = "A") |>
     select(
       "document_type",
       "prefecture_code",
       "police_code",
       "main_id",
-      sub_id           = "A",
+      "sub_id",
       stop_sign        = "stop_sign_a",
       stop_mark        = "stop_mark_a",
       age              = "age_a",
@@ -110,19 +111,20 @@ extract_party_a_data <- function(main_raw_data) {
       injury_level     = "injury_level_a",
       cognitive_test   = "cognitive_test_a",
       driving_practice = "driving_practice_a"
-    ) |>
-    mutate(sub_id = "A")
+    )
 
   return(party_a_data)
 }
 
 extract_party_b_data <- function(main_raw_data) {
   party_b_data <- main_raw_data |>
+    mutate(sub_id = "B") |>
     select(
       "document_type",
       "prefecture_code",
       "police_code",
       "main_id",
+      "sub_id",
       stop_sign        = "stop_sign_b",
       stop_mark        = "stop_mark_b",
       age              = "age_b",
@@ -139,8 +141,7 @@ extract_party_b_data <- function(main_raw_data) {
       injury_level     = "injury_level_b",
       cognitive_test   = "cognitive_test_b",
       driving_practice = "driving_practice_b"
-    ) |>
-    mutate(sub_id = "B")
+    )
 
   return(party_b_data)
 }
