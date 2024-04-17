@@ -21,5 +21,6 @@
 #' @importFrom stringr str_glue
 #' @importFrom stringr str_replace
 #' @importFrom stringr str_replace_na
+#' @importFrom tidyselect any_of
 ## usethis namespace: end
 NULL

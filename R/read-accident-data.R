@@ -35,7 +35,7 @@ read_accident_main_data <- function(file) {
       show_col_types = FALSE,
       lazy           = FALSE
     ) |>
-    rename(!!column_name_main)
+    rename(any_of(column_name_main))
 
   accident_data <- extract_accident_data(main_raw_data)
   party_a_data <- extract_party_a_data(main_raw_data)
@@ -52,7 +52,7 @@ read_accident_main_data <- function(file) {
 
 extract_accident_data <- function(main_raw_data) {
   accident_data <- main_raw_data |>
-    select(
+    select(any_of(c(
       "document_type", "prefecture_code", "police_code", "main_id",
       "injury_pattern", "faitality_number", "injury_number", "road_code",
       "kilopost_number", "city_code", "occurrence_year", "occurrence_month",
@@ -62,7 +62,7 @@ extract_accident_data <- function(main_raw_data) {
       "traffic_signal", "road_width", "road_alignment", "collision_position",
       "zone_regulation", "center_divider", "road_verge", "impact_type",
       "latitude", "longitude", "day_of_week", "holiday"
-    ) |>
+    ))) |>
     mutate(
       occurrence_time = make_datetime(
         year  = as.integer(.data$occurrence_year),
@@ -89,7 +89,7 @@ extract_accident_data <- function(main_raw_data) {
 extract_party_a_data <- function(main_raw_data) {
   party_a_data <- main_raw_data |>
     mutate(sub_id = "A") |>
-    select(
+    select(any_of(c(
       "document_type",
       "prefecture_code",
       "police_code",
@@ -111,7 +111,7 @@ extract_party_a_data <- function(main_raw_data) {
       injury_level     = "injury_level_a",
       cognitive_test   = "cognitive_test_a",
       driving_practice = "driving_practice_a"
-    )
+    )))
 
   return(party_a_data)
 }
@@ -119,7 +119,7 @@ extract_party_a_data <- function(main_raw_data) {
 extract_party_b_data <- function(main_raw_data) {
   party_b_data <- main_raw_data |>
     mutate(sub_id = "B") |>
-    select(
+    select(any_of(c(
       "document_type",
       "prefecture_code",
       "police_code",
@@ -141,7 +141,7 @@ extract_party_b_data <- function(main_raw_data) {
       injury_level     = "injury_level_b",
       cognitive_test   = "cognitive_test_b",
       driving_practice = "driving_practice_b"
-    )
+    )))
 
   return(party_b_data)
 }
@@ -157,7 +157,7 @@ read_accident_sub_data <- function(file) {
       show_col_types = FALSE,
       lazy           = FALSE
     ) |>
-    rename(!!column_name_sub)
+    rename(any_of(column_name_sub))
 
   return(sub_data)
 }
@@ -173,7 +173,7 @@ read_accident_highway_data <- function(file) {
       show_col_types = FALSE,
       lazy           = FALSE
     ) |>
-    rename(!!column_name_highway)
+    rename(any_of(column_name_highway))
 
   return(highway_data)
 }
