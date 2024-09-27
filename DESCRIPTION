@@ -26,3 +26,4 @@ Depends:
     R (>= 4.1.0)
 LazyData: true
 License: CC BY 4.0
+URL: https://nononoexe.github.io/jpaccidents/
