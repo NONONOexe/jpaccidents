@@ -2,23 +2,18 @@
 % Please edit documentation in R/download-accident-data.R
 \name{download_accident_data}
 \alias{download_accident_data}
-\alias{download_accident_main_data}
-\alias{download_accident_sub_data}
-\alias{download_accident_highway_data}
 \title{Download the traffic accident data}
 \usage{
-download_accident_main_data(download_dir = getwd(), year = 2022)
-
-download_accident_sub_data(download_dir = getwd(), year = 2022)
-
-download_accident_highway_data(download_dir = getwd(), year = 2022)
+download_accident_data(type, download_dir = getwd(), year = 2023)
 }
 \arguments{
+\item{type}{Type of data to download: one of "main", "sub", or "highway".}
+
 \item{download_dir}{A directory where downloaded file is to saved
 (default: \code{getwd()}).}
 
 \item{year}{Year the traffic accident data was recorded.
-Available from 2019 to 2022 (default: \code{2022}).}
+Available from 2019 to 2023 (default: \code{2023}).}
 }
 \value{
 Path of the downloaded file (invisibly).
@@ -27,21 +22,21 @@ Path of the downloaded file (invisibly).
 Download the file of traffic accident data provided
 the National Police Agency's Web page
 (https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html).
-
+}
+\details{
 The traffic accident data are divided into the following types:
 \itemize{
-\item main (honhyo; use \code{download_accident_main_data()})
-\item sub (hojuhyo; use \code{download_accident_sub_data()})
-\item highway (kosokuhyo; use \code{download_accident_highway_data()}
+\item "main" (honhyo)
+\item "sub" (hojuhyo)
+\item "highway" (kosokuhyo)
 }
 
-Please use the function corresponding to the type of data
-you want to download.
+You can specify the type of data directly via the \code{type} argument.
 }
 \examples{
 \dontrun{
-download_accident_main_data("download-dir-path", 2021)
-download_accident_sub_data("download-dir-path", 2021)
-download_accident_highway_data("download-dir-path", 2021)
+download_accident_data("main", "download-dir-path", 2023)
+download_accident_data("sub", "download-dir-path", 2023)
+download_accident_data("highway", "download-dir-path", 2023)
 }
 }

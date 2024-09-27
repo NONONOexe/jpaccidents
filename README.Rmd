@@ -18,6 +18,7 @@ devtools::load_all()
 # jpaccidents
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/NONONOexe/jpaccidents/branch/main/graph/badge.svg)](https://app.codecov.io/gh/NONONOexe/jpaccidents?branch=main)
 <!-- badges: end -->
 
 jpaccidents is package for handling the traffic accident data in Japan.

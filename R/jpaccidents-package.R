@@ -18,6 +18,7 @@
 #' @importFrom rlang .data
 #' @importFrom scales number
 #' @importFrom sf st_as_sf
+#' @importFrom stringr str_c
 #' @importFrom stringr str_glue
 #' @importFrom stringr str_replace
 #' @importFrom stringr str_replace_na

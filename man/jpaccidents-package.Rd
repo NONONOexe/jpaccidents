@@ -8,6 +8,13 @@
 \description{
 What the package does (one paragraph).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://nononoexe.github.io/jpaccidents/}
+}
+
+}
 \author{
 \strong{Maintainer}: Keisuke ANDO \email{ando@maslab.aitech.ac.jp}
 
