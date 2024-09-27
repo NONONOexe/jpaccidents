@@ -78,11 +78,11 @@
 <p>交通事故のデータは次のようにして利用することができます。</p>
 </blockquote>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">downloaded_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_accident_data.html">download_accident_main_data</a></span><span class="op">(</span>download_dir <span class="op">=</span> <span class="st">"download-dir-path"</span>, year <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">downloaded_path</span> <span class="op">&lt;-</span> <span class="fu">download_accident_main_data</span><span class="op">(</span>download_dir <span class="op">=</span> <span class="st">"download-dir-path"</span>, year <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span></span>
 <span><span class="va">main_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_accident_data.html">read_accident_main_data</a></span><span class="op">(</span><span class="va">downloaded_path</span><span class="op">)</span></span></code></pre></div>
-<p>There are three types of traffic accident data: main (honhyo), sub (hojyuhyo), and highway (kosokuhyo) data. The package provides functions for each of these. Use the function appropriate for the data you need. See also <code><a href="reference/download_accident_data.html">? download_accident_main_data</a></code> for more information.</p>
+<p>There are three types of traffic accident data: main (honhyo), sub (hojyuhyo), and highway (kosokuhyo) data. The package provides functions for each of these. Use the function appropriate for the data you need. See also <code>? download_accident_main_data</code> for more information.</p>
 <blockquote>
-<p>交通事故のデータは本票、補充票、高速票の3種類があります。 それぞれに対応する関数が用意されています。 必要なデータに応じて利用してください。 詳しくは<code><a href="reference/download_accident_data.html">? download_accident_main_data</a></code>を参照してください。</p>
+<p>交通事故のデータは本票、補充票、高速票の3種類があります。 それぞれに対応する関数が用意されています。 必要なデータに応じて利用してください。 詳しくは<code>? download_accident_main_data</code>を参照してください。</p>
 </blockquote>
 </div>
 <div class="section level2">
