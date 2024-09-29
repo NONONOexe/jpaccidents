@@ -1,20 +1,24 @@
 test_that("`download_accident_data` works with valid inputs", {
   local_mocked_bindings(download.file = function(url, destfile) {
-    file.copy(mock_accident_data_path, destfile, overwrite = TRUE)
+    if (!file.exists(mock_accident_data_path)) {
+      cat("Source file does not exist: ", mock_accident_data_path, "\n")
+    }
+
+    copy_result <- file.copy(mock_accident_data_path, destfile,
+                             overwrite = TRUE)
+
+    if (!copy_result) {
+      cat("Failed to copy file: ", mock_accident_data_path, " to ", destfile,
+          "\n")
+    }
+
     return(destfile)
   })
 
   # Test with "main" data type
   downloaded_file_path <- suppressMessages(
-    download_accident_data("main", temp_dir, 2022)
+    download_accident_data("main", tempdir(), 2022)
   )
-
-  ## --DEBUG BEGIN--
-  cat("Tempdir: ", temp_dir, "\n")
-  cat("Downloaded file path: ", downloaded_file_path, "\n")
-  cat("Is tempdir exists? ", dir.exists(temp_dir), "\n")
-  cat("Is downloaded file exists? ", file.exists(downloaded_file_path), "\n")
-  ## --DEBUG END--
 
   expect_true(file.exists(downloaded_file_path))
   expect_match(downloaded_file_path, "honhyo_2022[.]csv$")
