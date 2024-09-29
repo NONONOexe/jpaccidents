@@ -18,7 +18,8 @@ Imports:
     tidyselect,
     utils
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    withr
 Config/testthat/edition: 3
 Depends: 
     R (>= 4.1.0)
