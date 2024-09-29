@@ -1,13 +1,12 @@
 #' Download the traffic accident data
 #'
 #' Download the file of traffic accident data provided
-#' the National Police Agency's Web page
-#' (https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html).
+#' [the National Police Agency's Web page](https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html).
 #'
 #' The traffic accident data are divided into the following types:
-#'   * "main" (honhyo)
-#'   * "sub" (hojuhyo)
-#'   * "highway" (kosokuhyo)
+#'   * "main" (honhyo): Basic data on traffic accidents.
+#'   * "sub" (hojuhyo): Additional data related to the "main" data.
+#'   * "highway" (kosokuhyo): Data on traffic accidents on highways.
 #'
 #' You can specify the type of data directly via the `type` argument.
 #'

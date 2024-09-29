@@ -20,15 +20,14 @@ Path of the downloaded file (invisibly).
 }
 \description{
 Download the file of traffic accident data provided
-the National Police Agency's Web page
-(https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html).
+\href{https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html}{the National Police Agency's Web page}.
 }
 \details{
 The traffic accident data are divided into the following types:
 \itemize{
-\item "main" (honhyo)
-\item "sub" (hojuhyo)
-\item "highway" (kosokuhyo)
+\item "main" (honhyo): Basic data on traffic accidents.
+\item "sub" (hojuhyo): Additional data related to the "main" data.
+\item "highway" (kosokuhyo): Data on traffic accidents on highways.
 }
 
 You can specify the type of data directly via the \code{type} argument.
