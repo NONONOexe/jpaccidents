@@ -32,13 +32,12 @@ download_accident_data <- function(type, download_dir = getwd(), year = 2023) {
   # Validation
   valid_types <- names(type_map)
   if (!type %in% valid_types) {
-    cli_alert_danger("Invalid type. Please specify one of: {paste(valid_types, sep = ', ')}")
-    return(invisible(NULL))
+    stop("Invalid type. Please specify one of: ",
+         paste(valid_types, collapse = ', '))
   }
 
   if (year < 2019 || 2023 < year) {
-    cli_alert_danger("The year must be between 2019 and 2023.")
-    return(invisible(NULL))
+    stop("The year must be between 2019 and 2023.")
   }
 
   # Use string manipulation to create the URL
@@ -48,12 +47,10 @@ download_accident_data <- function(type, download_dir = getwd(), year = 2023) {
   # Create destination file path
   destfile <- file.path(download_dir, basename(url))
 
-  # Progress feedback using cli package
-  cli_progress_step("Downloading the file {.path {destfile}}",
-                    msg_done = "Downloaded {.path {destfile}} successfully!")
-
   # Download
-  downloaded_file_path <- curl_download(url, destfile)
+  message("Downloading the file to: ", destfile)
+  downloaded_file_path <- download.file(url, destfile)
+  message("Downloaded ", destfile, " successfly!")
 
   return(invisible(downloaded_file_path))
 }

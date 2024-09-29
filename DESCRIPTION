@@ -8,9 +8,6 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
-    celestial,
-    cli,
-    curl,
     dplyr,
     lubridate,
     readr,
@@ -18,7 +15,8 @@ Imports:
     scales,
     sf,
     stringr,
-    tidyselect
+    tidyselect,
+    utils
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
