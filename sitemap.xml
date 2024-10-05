@@ -6,8 +6,15 @@
 <url><loc>https://nononoexe.github.io/jpaccidents/index.html</loc></url>
 <url><loc>https://nononoexe.github.io/jpaccidents/reference/convert_deg.html</loc></url>
 <url><loc>https://nononoexe.github.io/jpaccidents/reference/download_accident_data.html</loc></url>
+<url><loc>https://nononoexe.github.io/jpaccidents/reference/filter_data_by_tag.html</loc></url>
+<url><loc>https://nononoexe.github.io/jpaccidents/reference/find_dataset_name.html</loc></url>
+<url><loc>https://nononoexe.github.io/jpaccidents/reference/get_config.html</loc></url>
 <url><loc>https://nononoexe.github.io/jpaccidents/reference/index.html</loc></url>
 <url><loc>https://nononoexe.github.io/jpaccidents/reference/jpaccidents-package.html</loc></url>
+<url><loc>https://nononoexe.github.io/jpaccidents/reference/load_config.html</loc></url>
+<url><loc>https://nononoexe.github.io/jpaccidents/reference/post_process.html</loc></url>
 <url><loc>https://nononoexe.github.io/jpaccidents/reference/read_accident_data.html</loc></url>
+<url><loc>https://nononoexe.github.io/jpaccidents/reference/reset_config.html</loc></url>
+<url><loc>https://nononoexe.github.io/jpaccidents/reference/select_post_processor.html</loc></url>
 </urlset>
 
