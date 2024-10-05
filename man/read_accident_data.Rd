@@ -2,40 +2,28 @@
 % Please edit documentation in R/read-accident-data.R
 \name{read_accident_data}
 \alias{read_accident_data}
-\alias{read_accident_main_data}
-\alias{read_accident_sub_data}
-\alias{read_accident_highway_data}
-\title{Read the traffic accident data}
+\title{Read accident data from a CSV file}
 \usage{
-read_accident_main_data(file)
-
-read_accident_sub_data(file)
-
-read_accident_highway_data(file)
+read_accident_data(
+  file,
+  post_process = select_post_processor(find_dataset_name(file))
+)
 }
 \arguments{
-\item{file}{A character string of the file path.}
+\item{file}{The path to the CSV file.}
+
+\item{post_process}{A function to apply post-processing to the data.}
 }
 \value{
-\code{read_accident_main_data()} separates traffic accident data
-and injured party data from the target data and returns them as a list.
-\code{read_accident_sub_data()} and \code{read_accident_highway_data()} return
-the contents of the target data as a tibble.
+A data frame containing the accident data.
 }
 \description{
-Read the file of traffic accident data.
-
-Use the appropriate function for the type of data you want to read:
-\itemize{
-\item \code{read_accident_main_data()} to read the main data (honhyo).
-\item \code{read_accident_sub_data()} to read the sub data (hojuhyo).
-\item \code{read_accident_highway_data()} to read the highway data (kosokuhyo).
-}
+This function reads accident data from a CSV file,
+renames the columns, adds attributes and class, and applies
+post-processing if provided.
 }
 \examples{
 \dontrun{
-read_accident_main_data("downloaded-file-path.csv")
-read_accident_sub_data("downloaded-file-path.csv")
-read_accident_highway_data("downloaded-file-path.csv")
+read_accident_data("example/honhyo_2023.csv")
 }
 }

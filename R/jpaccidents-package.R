@@ -2,21 +2,11 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom dplyr bind_rows
-#' @importFrom dplyr if_else
-#' @importFrom dplyr mutate
-#' @importFrom dplyr rename
-#' @importFrom dplyr select
 #' @importFrom lubridate make_datetime
-#' @importFrom readr cols
-#' @importFrom readr locale
-#' @importFrom readr read_csv
-#' @importFrom rlang .data
-#' @importFrom scales number
 #' @importFrom sf st_as_sf
-#' @importFrom stringr str_replace
-#' @importFrom stringr str_replace_na
-#' @importFrom tidyselect any_of
+#' @importFrom stats setNames
 #' @importFrom utils download.file
+#' @importFrom utils read.csv
+#' @importFrom yaml read_yaml
 ## usethis namespace: end
 NULL

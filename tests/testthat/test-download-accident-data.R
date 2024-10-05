@@ -1,16 +1,6 @@
 test_that("`download_accident_data` works with valid inputs", {
-  local_mocked_bindings(download.file = function(url, destfile) {
-    if (!file.exists(mock_accident_data_path)) {
-      cat("Source file does not exist: ", mock_accident_data_path, "\n")
-      return(NA_character_)
-    }
-    copy_result <- file.copy(mock_accident_data_path, destfile,
-                             overwrite = TRUE)
-    if (!copy_result) {
-      cat("Failed to copy file: ", mock_accident_data_path, " to ",
-          destfile, "\n")
-      return(NA_character_)
-    }
+  local_mocked_bindings(download.file = function(url, destfile, quiet) {
+    file.copy(mock_accident_data_path, destfile, overwrite = TRUE)
 
     return(destfile)
   })
