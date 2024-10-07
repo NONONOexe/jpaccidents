@@ -37,7 +37,7 @@ read_accident_data <- function(
 
   # Add attributes and class
   attr(accident_data, "dataset_name") <- dataset_name
-  class(accident_data) <- c("accident_data", "data.frame")
+  class(accident_data) <- c("accident_data", class(accident_data))
 
   # Apply post-processing if provided
   if (is.function(post_process)) {

@@ -52,13 +52,6 @@ post_process_main <- function(data) {
   accident_data$latitude  <- convert_deg(accident_data$latitude)
   accident_data$longitude <- convert_deg(accident_data$longitude)
 
-  # Convert to sf object
-  accident_data_sf <- st_as_sf(
-    accident_data,
-    coords = c("longitude", "latitude"),
-    crs = 4326
-  )
-
   # Filter person data
   filter_person_data <- function(data, tag, suf) {
     person_data <- filter_data_by_tag(data, tag)
@@ -74,7 +67,11 @@ post_process_main <- function(data) {
 
   # Combine process data
   processed_data <- list(
-    accident = cbind(key_data, accident_data_sf),
+    accident = st_as_sf(
+      cbind(key_data, accident_data),
+      coords = c("longitude", "latitude"),
+      crs = 4326
+    ),
     person   = rbind(
       cbind(key_data, person_a_data),
       cbind(key_data, person_b_data)
