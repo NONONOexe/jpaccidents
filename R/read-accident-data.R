@@ -14,12 +14,8 @@
 #' }
 read_accident_data <- function(
     file,
-    post_process = select_post_processor(find_dataset_name(file))
+    post_process = select_post_processor(lookup_dataset_name(file))
   ) {
-
-  # Get dataset name and configuration
-  dataset_name <- find_dataset_name(file)
-  config <- get_config()[[dataset_name]]$columns
 
   # Read file
   accident_data <- read.csv(
@@ -29,11 +25,14 @@ read_accident_data <- function(
     check.names      = FALSE
   )
 
+  # Get dataset name and configuration
+  dataset_name <- lookup_dataset_name(file)
+
   # Rename columns
-  original_names <- sapply(config, `[[`, "original_name")
-  col_names_match <- match(names(accident_data), original_names)
-  names(accident_data)[!is.na(col_names_match)] <-
-    names(original_names)[col_names_match[!is.na(col_names_match)]]
+  names(accident_data) <- lookup_column_names(
+    dataset_name,
+    names(accident_data)
+  )
 
   # Add attributes and class
   attr(accident_data, "dataset_name") <- dataset_name

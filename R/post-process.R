@@ -49,21 +49,35 @@ post_process_main <- function(data) {
   )
 
   # Convert latitude and longitude from DMS to decimal
-  accident_data$latitude  <- convert_deg(accident_data$latitude)
-  accident_data$longitude <- convert_deg(accident_data$longitude)
+  accident_data$latitude  <- suppressWarnings(
+    convert_deg(accident_data$latitude)
+  )
+  accident_data$longitude <- suppressWarnings(
+    convert_deg(accident_data$longitude)
+  )
 
-  # Filter person data
+  # Filter valid rows based on non-missing coordinates
+  valid_rows <- !is.na(accident_data$latitude) & !is.na(accident_data$longitude)
+  accident_data <- accident_data[valid_rows, ]
+
+  if (nrow(accident_data) < nrow(data)) {
+    warning("Invalid coordinate format detected. Some rows have been excluded.")
+  }
+
+  # Function to filter and clean person data
   filter_person_data <- function(data, tag, suf) {
     person_data <- filter_data_by_tag(data, tag)
     names(person_data) <- sub(paste0(suf, "$"), "", names(person_data))
 
     return(person_data)
   }
-  person_a_data <- filter_person_data(data, "person_a", "_a")
-  person_b_data <- filter_person_data(data, "person_b", "_b")
+
+  # Filter person data
+  person_a_data <- filter_person_data(data, "person_a", "_a")[valid_rows, ]
+  person_b_data <- filter_person_data(data, "person_b", "_b")[valid_rows, ]
 
   # Filter key data
-  key_data <- filter_data_by_tag(data, "key")
+  key_data <- filter_data_by_tag(data, "key")[valid_rows, ]
 
   # Combine process data
   processed_data <- list(
@@ -72,7 +86,7 @@ post_process_main <- function(data) {
       coords = c("longitude", "latitude"),
       crs = 4326
     ),
-    person   = rbind(
+    person = rbind(
       cbind(key_data, person_a_data),
       cbind(key_data, person_b_data)
     )

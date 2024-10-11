@@ -6,7 +6,7 @@
 \usage{
 read_accident_data(
   file,
-  post_process = select_post_processor(find_dataset_name(file))
+  post_process = select_post_processor(lookup_dataset_name(file))
 )
 }
 \arguments{

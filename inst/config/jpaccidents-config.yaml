@@ -25,6 +25,9 @@ main_data:
     road_code:
       original_name: "路線コード"
       tag: "accident"
+    road_direction:
+      original_name: "上下線"
+      tag: "accident"
     kilopost_number:
       original_name: "地点コード"
       tag: "accident"
@@ -58,6 +61,9 @@ main_data:
       tag: "accident"
     weather:
       original_name: "天候"
+      tag: "accident"
+    roundabout_diameter:
+      original_name: "環状交差点の直径"
       tag: "accident"
     region_type:
       original_name: "地形"
@@ -123,10 +129,14 @@ main_data:
       original_name: "用途別（当事者B）"
       tag: "person_b"
     car_type_a:
-      original_name: "車両形状等（当事者A）"
+      original_name:
+        - "車両形状（当事者A）"
+        - "車両形状等（当事者A）"
       tag: "person_a"
     car_type_b:
-      original_name: "車両形状等（当事者B）"
+      original_name:
+        - "車両形状（当事者B）"
+        - "車両形状等（当事者B）"
       tag: "person_b"
     automatic_car_a:
       original_name: "オートマチック車（当事者A）"

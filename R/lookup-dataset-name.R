@@ -7,8 +7,8 @@
 #' @return Dataset name
 #' @export
 #' @examples
-#' find_dataset_name("example/honhyo_2023.csv")
-find_dataset_name <- function(file) {
+#' lookup_dataset_name("example/honhyo_2023.csv")
+lookup_dataset_name <- function(file) {
   # Get configuration
   config <- get_config()
 
