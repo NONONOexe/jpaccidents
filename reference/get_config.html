@@ -69,6 +69,7 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - faitality_number: 死者数 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - injury_number: 負傷者数 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_code: 路線コード ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - road_direction: 上下線 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - kilopost_number: 地点コード ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - city_code: 市区町村コード ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - occurrence_year: 発生日時　　年 ()</span>
@@ -82,6 +83,7 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - sunset_hour: 日の入り時刻　　時 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - sunset_min: 日の入り時刻　　分 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - weather: 天候 ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - roundabout_diameter: 環状交差点の直径 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - region_type: 地形 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_surface: 路面状態 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_shape: 道路形状 ()</span>
@@ -103,8 +105,8 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - party_type_b: 当事者種別（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - use_type_a: 用途別（当事者A） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - use_type_b: 用途別（当事者B） ()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_a: 車両形状等（当事者A） ()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_b: 車両形状等（当事者B） ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_a: 車両形状（当事者A） 車両形状等（当事者A） ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_b: 車両形状（当事者B） 車両形状等（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - automatic_car_a: オートマチック車（当事者A） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - automatic_car_b: オートマチック車（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - support_car_a: サポカー（当事者A） ()</span>
@@ -140,6 +142,7 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - faitality_number: 死者数 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - injury_number: 負傷者数 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_code: 路線コード ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - road_direction: 上下線 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - kilopost_number: 地点コード ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - city_code: 市区町村コード ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - occurrence_year: 発生日時　　年 ()</span>
@@ -153,6 +156,7 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - sunset_hour: 日の入り時刻　　時 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - sunset_min: 日の入り時刻　　分 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - weather: 天候 ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - roundabout_diameter: 環状交差点の直径 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - region_type: 地形 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_surface: 路面状態 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_shape: 道路形状 ()</span>
@@ -174,8 +178,8 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - party_type_b: 当事者種別（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - use_type_a: 用途別（当事者A） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - use_type_b: 用途別（当事者B） ()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_a: 車両形状等（当事者A） ()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_b: 車両形状等（当事者B） ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_a: 車両形状（当事者A） 車両形状等（当事者A） ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_b: 車両形状（当事者B） 車両形状等（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - automatic_car_a: オートマチック車（当事者A） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - automatic_car_b: オートマチック車（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - support_car_a: サポカー（当事者A） ()</span>
@@ -211,6 +215,7 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - faitality_number: 死者数 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - injury_number: 負傷者数 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_code: 路線コード ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - road_direction: 上下線 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - kilopost_number: 地点コード ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - city_code: 市区町村コード ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - occurrence_year: 発生日時　　年 ()</span>
@@ -224,6 +229,7 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - sunset_hour: 日の入り時刻　　時 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - sunset_min: 日の入り時刻　　分 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - weather: 天候 ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - roundabout_diameter: 環状交差点の直径 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - region_type: 地形 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_surface: 路面状態 ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - road_shape: 道路形状 ()</span>
@@ -245,8 +251,8 @@ load_config()."></head><body>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - party_type_b: 当事者種別（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - use_type_a: 用途別（当事者A） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - use_type_b: 用途別（当事者B） ()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_a: 車両形状等（当事者A） ()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_b: 車両形状等（当事者B） ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_a: 車両形状（当事者A） 車両形状等（当事者A） ()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - car_type_b: 車両形状（当事者B） 車両形状等（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - automatic_car_a: オートマチック車（当事者A） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - automatic_car_b: オートマチック車（当事者B） ()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     - support_car_a: サポカー（当事者A） ()</span>
