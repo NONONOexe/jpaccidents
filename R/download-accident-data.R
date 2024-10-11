@@ -51,5 +51,5 @@ download_accident_data <- function(type, download_dir = getwd(), year = 2023) {
   downloaded_file_path <- download.file(url, destfile, quiet = TRUE)
   message("Downloaded ", destfile, " successfly!")
 
-  return(invisible(downloaded_file_path))
+  return(invisible(destfile))
 }
