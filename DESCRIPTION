@@ -19,7 +19,7 @@ Suggests:
     withr
 Config/testthat/edition: 3
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.0.5)
 LazyData: true
 License: CC BY 4.0
 URL: https://nononoexe.github.io/jpaccidents/
