@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom lifecycle deprecated
 #' @importFrom lubridate make_datetime
 #' @importFrom sf st_as_sf
 #' @importFrom stats setNames
