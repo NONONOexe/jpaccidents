@@ -6,6 +6,8 @@
 \alias{jpaccidents-package}
 \title{jpaccidents: Tools for Traffic Accident Data in Japan}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 What the package does (one paragraph).
 }
 \seealso{
