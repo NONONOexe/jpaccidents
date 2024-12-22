@@ -64,7 +64,7 @@ print.jpaccidents_config <- function(x, ...) {
     for (name in names(x$main_data$columns)) {
       column <- x$main_data$columns[[name]]
       cat("    -", name)
-      cat(":", column$original_name, paste0("(", column$category, ")\n"))
+      cat(":", column$original_name, "\n")
     }
   }
 
