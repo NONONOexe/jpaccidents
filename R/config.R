@@ -8,9 +8,7 @@
 #' @seealso [reset_config()] for resetting the configuration.
 #' @export
 #' @examples
-#' \dontrun{
-#' config <- get_config()
-#' }
+#' get_config()
 get_config <- function() {
   config <- getOption("jpaccidents.config")
   if (is.null(config)) {
@@ -53,11 +51,7 @@ load_config <- function(config_path) {
 #' @examples
 #' reset_config()
 reset_config <- function() {
-  load_config(system.file(
-    "config",
-    "jpaccidents-config.yaml",
-    package = "jpaccidents"
-  ))
+  options(jpaccidents.config = default_config)
 }
 
 #' @export
