@@ -8,7 +8,9 @@
 #' @seealso [reset_config()] for resetting the configuration.
 #' @export
 #' @examples
-#' get_config()
+#' \dontrun{
+#' config <- get_config()
+#' }
 get_config <- function() {
   config <- getOption("jpaccidents.config")
   if (is.null(config)) {

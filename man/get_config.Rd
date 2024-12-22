@@ -14,7 +14,9 @@ This function retrieves the configuration that were loaded using
 \code{load_config()}.
 }
 \examples{
-get_config()
+\dontrun{
+config <- get_config()
+}
 }
 \seealso{
 \code{\link[=load_config]{load_config()}} for loading the configuration.
