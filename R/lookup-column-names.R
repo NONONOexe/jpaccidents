@@ -1,6 +1,6 @@
 #' Lookup new column names for an accident dataset
 #'
-#' This function retreieves the new column names corresponding to
+#' This function retrieves the new column names corresponding to
 #' the original column names in a specified dataset. The column
 #' names are based on the configuration loaded by `load_config()`.
 #' This is useful when the original names are in Japanese (2-byte
@@ -12,8 +12,6 @@
 #' @return A vector of new column names corresponding to the provided
 #'   original names.
 #' @export
-#' @examples
-#' lookup_column_names("main_data", c("死者数", "天候"))
 lookup_column_names <- function(dataset_name, original_names) {
   # Retrieve column configuration for the specified dataset
   column_config <- get_config()[[dataset_name]]$columns
