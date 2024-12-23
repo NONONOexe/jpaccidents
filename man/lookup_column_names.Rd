@@ -16,13 +16,10 @@ A vector of new column names corresponding to the provided
 original names.
 }
 \description{
-This function retreieves the new column names corresponding to
+This function retrieves the new column names corresponding to
 the original column names in a specified dataset. The column
 names are based on the configuration loaded by \code{load_config()}.
 This is useful when the original names are in Japanese (2-byte
 characters), which can be difficult to handle in programs.
 This function converts them to corresponding English names.
-}
-\examples{
-lookup_column_names("main_data", c("死者数", "天候"))
 }
