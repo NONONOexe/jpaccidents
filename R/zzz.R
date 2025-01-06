@@ -7,4 +7,7 @@
       "Please check the config path."
     )
   })
+
+  # To disable the progress bar during data loading
+  options(readr.show_progress = FALSE)
 }

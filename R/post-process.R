@@ -40,11 +40,11 @@ post_process_main <- function(data) {
 
   # Create datetime from individual columns in the original data
   accident_data$occurrence_time <- make_datetime(
-    year  = data$occurrence_year,
-    month = data$occurrence_month,
-    day   = data$occurrence_day,
-    hour  = data$occurrence_hour,
-    min   = data$occurrence_min,
+    year  = as.integer(data$occurrence_year),
+    month = as.integer(data$occurrence_month),
+    day   = as.integer(data$occurrence_day),
+    hour  = as.integer(data$occurrence_hour),
+    min   = as.integer(data$occurrence_min),
     tz    = "Asia/Tokyo"
   )
 

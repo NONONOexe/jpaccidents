@@ -18,11 +18,10 @@ read_accident_data <- function(
   ) {
 
   # Read file
-  accident_data <- read.csv(
+  accident_data <- read_csv(
     file,
-    fileEncoding     = "Shift_JIS",
-    stringsAsFactors = FALSE,
-    check.names      = FALSE
+    locale         = locale(encoding = "Shift_JIS"),
+    show_col_types = FALSE
   )
 
   # Get dataset name and configuration
