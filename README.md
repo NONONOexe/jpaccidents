@@ -63,11 +63,16 @@ See also `? download_accident_main_data` for more information.
 
 ## License
 
-This project is licensed under the [Creative Commons Attribution 4.0
-International License](https://creativecommons.org/licenses/by/4.0/).
+This package is licensed under the MIT License - see the
+[LICENSE](LICENSE) file for details. The traffic accident data
+downloaded using this package is provided by the National Police Agency
+of Japan under the [Creative Commons Attribution 4.0 International
+License](https://creativecommons.org/licenses/by/4.0/).
 
-> このプロジェクトは[クリエイティブ・コモンズ 表示 4.0 国際
-> ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)に従います。
+> このパッケージはMITライセンスの下で提供されています。詳細は[LICENSE](LICENSE)ファイルを参照してください。
+> また、本パッケージによりダウンロードできる交通事故データは、警察庁により[クリエイティブ・コモンズ
+> 表示 4.0 国際
+> ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)の下で提供されています。
 
 ## Code of Conduct
 
