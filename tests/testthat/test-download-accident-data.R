@@ -1,8 +1,8 @@
 test_that("`download_accident_data` works with valid inputs", {
-  local_mocked_bindings(download.file = function(url, destfile, quiet) {
-    file.copy(mock_accident_data_path, destfile, overwrite = TRUE)
+  local_mocked_bindings(multi_download = function(urls, destfiles) {
+    file.copy(mock_accident_data_path, destfiles, overwrite = TRUE)
 
-    return(destfile)
+    return(destfiles)
   })
 
   # Test with "main" data type
@@ -30,13 +30,19 @@ test_that("`download_accident_data` works with valid inputs", {
 })
 
 test_that("`download_accident_data` handles invalid data types", {
-  expect_error(download_accident_data("invalid", temp_dir, 2022),
-               "Invalid type. Please specify one of: main, sub, highway")
+  expect_error(
+    download_accident_data("invalid", temp_dir, 2022),
+    "Invalid type. Please specify one of: main, sub, and highway."
+  )
 })
 
 test_that("`download_accident_data` handles invalid years", {
-  expect_error(download_accident_data("main", temp_dir, 2018),
-               "The year must be between 2019 and 2023.")
-  expect_error(download_accident_data("main", temp_dir, 2024),
-               "The year must be between 2019 and 2023.")
+  expect_error(
+    download_accident_data("main", temp_dir, 2018),
+    "The `years` must be between 2019 and 2023. Invalid year\\(s\\) provided: 2018."
+  )
+  expect_error(
+    download_accident_data("main", temp_dir, 2024),
+    "The `years` must be between 2019 and 2023. Invalid year\\(s\\) provided: 2024."
+  )
 })

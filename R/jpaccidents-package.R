@@ -2,6 +2,9 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom cli cli_abort
+#' @importFrom cli cli_alert_success
+#' @importFrom curl multi_download
 #' @importFrom lubridate make_datetime
 #' @importFrom readr locale
 #' @importFrom readr read_csv

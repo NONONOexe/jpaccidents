@@ -4,7 +4,7 @@
 \alias{download_accident_data}
 \title{Download the traffic accident data}
 \usage{
-download_accident_data(type, download_dir = getwd(), year = 2023)
+download_accident_data(type, download_dir = getwd(), years = 2023)
 }
 \arguments{
 \item{type}{Type of data to download: one of "main", "sub", or "highway".}
@@ -12,8 +12,9 @@ download_accident_data(type, download_dir = getwd(), year = 2023)
 \item{download_dir}{A directory where downloaded file is to saved
 (default: \code{getwd()}).}
 
-\item{year}{Year the traffic accident data was recorded.
-Available from 2019 to 2023 (default: \code{2023}).}
+\item{years}{Years the traffic accident data were recorded.
+Available from 2019 to 2023. You can specify a single year or
+vector of years(default: \code{2023}).}
 }
 \value{
 Path of the downloaded file (invisibly).
