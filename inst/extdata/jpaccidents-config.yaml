@@ -282,3 +282,64 @@ highway_data:
       original_name: "速度規制（臨時のみ）"
     tunnel_length:
       original_name: "トンネル延長距離"
+
+# Code mapping
+concepts:
+  document_type:
+    main:
+      codes: "1"
+      names:
+        en: "main"
+        jp: "本票"
+    sub:
+      codes: "2"
+      names:
+        en: "sub"
+        jp: "補充票"
+    highway:
+      codes: "3"
+      names:
+        en: "highway"
+        jp: "高速票"
+
+  impact_part:
+    front:
+      codes: "1"
+      names:
+        en: "front"
+        jp: "前方"
+    right:
+      codes: "2"
+      names:
+        en: "right"
+        jp: "右方"
+    rear:
+      codes: "3"
+      names:
+        en: "rear"
+        jp: "後方"
+    left:
+      codes: "4"
+      names:
+        en: "left"
+        jp: "左方"
+    front_right:
+      codes: "5"
+      names:
+        en: "front_right"
+        jp: "前方右"
+    rear_right:
+      codes: "6"
+      names:
+        en: "rear_right"
+        jp: "後方右"
+    rear_left:
+      codes: "7"
+      names:
+        en: "rear_left"
+        jp: "後方左"
+    front_left:
+      codes: "8"
+      names:
+        en: "front_left"
+        jp: "前方左"
