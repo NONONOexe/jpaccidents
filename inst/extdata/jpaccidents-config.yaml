@@ -127,7 +127,7 @@ file_types:
 
 # Logical schema definitions
 schemas:
-  accidents_info:
+  accident_info:
     primary_key:
       - document_type
       - prefecture_code
@@ -165,7 +165,7 @@ schemas:
       - geometry
     source_files:
       - main_data
-  persons_info:
+  person_info:
     primary_key:
       - document_type
       - prefecture_code
@@ -192,7 +192,7 @@ schemas:
     source_files:
       - main_data
       - sub_data
-  highways_info:
+  highway_info:
     primary_key:
       - document_type
       - prefecture_code

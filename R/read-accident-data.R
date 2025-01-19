@@ -2,22 +2,22 @@
 #'
 #' This function reads accident data from multiple CSV files,
 #' processes each file, and combines the data into three categories:
-#'   * `accidents_info`
-#'   * `persons_info`
-#'   * `highways_info`
+#'   * `accident_info`
+#'   * `person_info`
+#'   * `highway_info`
 #'
 #' @param file_paths A character vector of file paths to the CSV files.
 #' @return A list containing the accident data split into three data frames:
-#'   `accidents_info`, `persons_info`, and `highways_info`.
+#'   `accident_info`, `person_info`, and `highway_info`.
 #' @export
 #' @examples
 #' \dontrun{
-#' read_accidents_data(c(
+#' read_accident_data(c(
 #'   "example/honhyo_2023.csv",
 #'   "example/hojuhyo_2023.csv"
 #' ))
 #' }
-read_accidents_data <- function(file_paths) {
+read_accident_data <- function(file_paths) {
   # Process all files and extract valid data
   data_list <- lapply(file_paths, process_single_file)
   valid_data <- Filter(Negate(is.null), data_list)
@@ -31,15 +31,10 @@ read_accidents_data <- function(file_paths) {
   # Post-process valid data
   processed_data <- lapply(valid_data, post_process)
 
-  # Extract data categories
-  accidents_info <- combine_data(processed_data, "accidents_info")
-  persons_info <- combine_data(processed_data, "persons_info")
-  highways_info <- combine_data(processed_data, "highways_info")
-
   return(list(
-    accidents_info = accidents_info,
-    persons_info   = persons_info,
-    highways_info  = highways_info
+    accident_info = combine_data(processed_data, "accident_info"),
+    person_info   = combine_data(processed_data, "person_info"),
+    highway_info  = combine_data(processed_data, "highway_info")
   ))
 }
 
