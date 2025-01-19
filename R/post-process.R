@@ -59,7 +59,7 @@ post_process_main <- function(data) {
   }
 
   # Extract accident related columns from spatial data
-  accidents_info <- extract_schema_columns(location_data_sf, "accidents_info")
+  accidents_info <- extract_schema_columns(location_data_sf, "accident_info")
 
   # Create datetime from individual columns in the original data
   accidents_info$occurrence_time <- make_datetime(
@@ -72,7 +72,7 @@ post_process_main <- function(data) {
   )
 
   # Extract person related columns from the original data
-  persons_info <- extract_schema_columns(location_data, "persons_info")
+  persons_info <- extract_schema_columns(location_data, "person_info")
 
   # Combine process accident and person data into a list
   processed_data <- list(
@@ -86,11 +86,11 @@ post_process_main <- function(data) {
 #' @rdname post_process
 #' @export
 post_process_sub <- function(data) {
-  return(extract_schema_columns(data, "persons_info"))
+  return(extract_schema_columns(data, "person_info"))
 }
 
 #' @rdname post_process
 #' @export
 post_process_highway <- function(data) {
-  return(extract_schema_columns(data, "highways_info"))
+  return(extract_schema_columns(data, "highway_info"))
 }
