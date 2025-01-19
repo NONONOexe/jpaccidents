@@ -1,24 +1,3 @@
-#' Select post-processor function based on dataset name
-#'
-#' This function selects the post-processor function based on
-#' the given dataset name.
-#'
-#' @param dataset_name The name of the dataset.
-#' @return The post-processing function corresponding to the dataset name.
-#' @export
-select_post_processor <- function(dataset_name) {
-  # Select post-processor
-  post_processor <- switch(
-    dataset_name,
-    "main_data"    = post_process_main,
-    "sub_data"     = post_process_sub,
-    "highway_data" = post_process_highway,
-    warning("Unknown dataset name: ", dataset_name)
-  )
-
-  return(post_processor)
-}
-
 #' Post-process data
 #'
 #' These function perform post-processing operations on different datasets.
@@ -30,70 +9,76 @@ select_post_processor <- function(dataset_name) {
 #' @name post_process
 #' @param data The data to be processed.
 #' @return A processed data.
-NULL
+post_process <- function(data) {
+  UseMethod("post_process")
+}
+
+#' @rdname post_process
+#' @export
+post_process.accident_data <- function(data) {
+  dataset_name <- attr(data, "dataset_name")
+  post_processor <- switch (
+    dataset_name,
+    "main_data"    = post_process_main,
+    "sub_data"     = post_process_sub,
+    "highway_data" = post_process_highway,
+    function(data) {
+      cli_alert_warning("Unknown dataset name: {dataset_name}")
+      return(NULL)
+    }
+  )
+  processed_data <- post_processor(data)
+  attr(processed_data, "dataset_name") <- dataset_name
+
+  return(processed_data)
+}
 
 #' @rdname post_process
 #' @export
 post_process_main <- function(data) {
-  # Filter accident data
-  accident_data <- filter_data_by_tag(data, "accident")
+  # Convert latitude and longitude from DMS to decimal
+  data$latitude <- suppressWarnings(convert_deg(data$latitude))
+  data$longitude <- suppressWarnings(convert_deg(data$longitude))
+
+  # Filter valid rows based on non-missing coordinates
+  valid_rows <- !is.na(data$latitude) & !is.na(data$longitude)
+  location_data <- data[valid_rows, ]
+
+  # Convert data to spatial data format (sf object)
+  location_data_sf <- st_as_sf(
+    location_data,
+    coords = c("longitude", "latitude"),
+    crs = 4326
+  )
+
+  # Alert user if any rows were removed due to invalid coordinates
+  removed_rows <- nrow(data) - nrow(location_data_sf)
+  file_path <- attr(data, "file_path")
+  if (0 < removed_rows) {
+    cli_alert_warning("Invalid coordinate format detected in file: {file_path}. {removed_rows} rows have been excluded.")
+  }
+
+  # Extract accident related columns from spatial data
+  accidents_info <- extract_schema_columns(location_data_sf, "accidents_info")
 
   # Create datetime from individual columns in the original data
-  accident_data$occurrence_time <- make_datetime(
-    year  = as.integer(data$occurrence_year),
-    month = as.integer(data$occurrence_month),
-    day   = as.integer(data$occurrence_day),
-    hour  = as.integer(data$occurrence_hour),
-    min   = as.integer(data$occurrence_min),
+  accidents_info$occurrence_time <- make_datetime(
+    year  = as.integer(location_data_sf$occurrence_year),
+    month = as.integer(location_data_sf$occurrence_month),
+    day   = as.integer(location_data_sf$occurrence_day),
+    hour  = as.integer(location_data_sf$occurrence_hour),
+    min   = as.integer(location_data_sf$occurrence_min),
     tz    = "Asia/Tokyo"
   )
 
-  # Convert latitude and longitude from DMS to decimal
-  accident_data$latitude  <- suppressWarnings(
-    convert_deg(accident_data$latitude)
-  )
-  accident_data$longitude <- suppressWarnings(
-    convert_deg(accident_data$longitude)
-  )
+  # Extract person related columns from the original data
+  persons_info <- extract_schema_columns(location_data, "persons_info")
 
-  # Filter valid rows based on non-missing coordinates
-  valid_rows <- !is.na(accident_data$latitude) & !is.na(accident_data$longitude)
-  accident_data <- accident_data[valid_rows, ]
-
-  if (nrow(accident_data) < nrow(data)) {
-    warning("Invalid coordinate format detected. Some rows have been excluded.")
-  }
-
-  # Function to filter and clean person data
-  filter_person_data <- function(data, tag, suf) {
-    person_data <- filter_data_by_tag(data, tag)
-    names(person_data) <- sub(paste0(suf, "$"), "", names(person_data))
-
-    return(person_data)
-  }
-
-  # Filter person data
-  person_a_data <- filter_person_data(data, "person_a", "_a")[valid_rows, ]
-  person_b_data <- filter_person_data(data, "person_b", "_b")[valid_rows, ]
-
-  # Filter key data
-  key_data <- filter_data_by_tag(data, "key")[valid_rows, ]
-
-  # Combine process data
+  # Combine process accident and person data into a list
   processed_data <- list(
-    accident = st_as_sf(
-      cbind(key_data, accident_data),
-      coords = c("longitude", "latitude"),
-      crs = 4326
-    ),
-    person = rbind(
-      cbind(key_data, person_a_data),
-      cbind(key_data, person_b_data)
-    )
+    accidents_info = accidents_info,
+    persons_info = persons_info
   )
-
-  # Set dataset name attribute
-  attr(processed_data, "dataset_name") <- attr(accident_data, "dataset_name")
 
   return(processed_data)
 }
@@ -101,11 +86,11 @@ post_process_main <- function(data) {
 #' @rdname post_process
 #' @export
 post_process_sub <- function(data) {
-  return(data)
+  return(extract_schema_columns(data, "persons_info"))
 }
 
 #' @rdname post_process
 #' @export
 post_process_highway <- function(data) {
-  return(data)
+  return(extract_schema_columns(data, "highways_info"))
 }

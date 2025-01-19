@@ -2,11 +2,16 @@
 % Please edit documentation in R/post-process.R
 \name{post_process}
 \alias{post_process}
+\alias{post_process.accident_data}
 \alias{post_process_main}
 \alias{post_process_sub}
 \alias{post_process_highway}
 \title{Post-process data}
 \usage{
+post_process(data)
+
+\method{post_process}{accident_data}(data)
+
 post_process_main(data)
 
 post_process_sub(data)

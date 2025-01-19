@@ -56,29 +56,59 @@ reset_config <- function() {
 
 #' @export
 print.jpaccidents_config <- function(x, ...) {
-  print_cols <- function(cols) {
-    for (name in names(x$main_data$columns)) {
-      column <- x$main_data$columns[[name]]
-      cat("    -", name)
-      cat(":", column$original_name, "\n")
+  cat("Accident Data Configuration\n")
+  cat("---------------------------\n")
+
+  # File Types
+  cat("File types:\n")
+  for (name in names(x$file_types)) {
+    info <- x$file_types[[name]]
+    pattern <- info$pattern
+    column_count <- length(info$columns)
+    cat(sprintf("  - %s: %s (%d columns)\n", name, pattern, column_count))
+  }
+
+  # Schemas
+  cat("\nSchemas:\n")
+  for (name in names(x$schemas)) {
+    schema <- x$schemas[[name]]
+    primary_key <- paste(schema$primary_key, collapse = ", ")
+    column_count <- length(schema$data_columns)
+    cat(sprintf("  - %s: Primary Key = %s (%d columns)\n", name, primary_key, column_count))
+  }
+}
+
+#' @export
+summary.jpaccidents_config <- function(object, ...) {
+  cat("Accident Data Configuration Summary\n")
+  cat("-----------------------------------\n")
+
+  # File Types
+  cat("File types:\n")
+  for (name in names(object$file_types)) {
+    info <- object$file_types[[name]]
+    cat(sprintf("  - %s\n", name))
+    cat(sprintf("      Pattern: %s\n", info$pattern))
+    cat(sprintf("      Columns: [%s]\n", paste(info$columns, collapse = ", ")))
+  }
+
+  # Schemas
+  cat("\nSchemas:\n")
+  for (name in names(object$schemas)) {
+    schema <- object$schemas[[name]]
+    cat(sprintf("  - %s\n", name))
+    cat(sprintf("      Primary Key: [%s]\n", paste(schema$primary_key, collapse = ", ")))
+    cat(sprintf("      Data Columns: [%s]\n", paste(schema$data_columns, collapse = ", ")))
+    cat(sprintf("      Source Files: [%s]\n", paste(schema$source_files, collapse = ", ")))
+    if (!is.null(schema$suffixes)) {
+      cat(sprintf("    Suffixes: [%s]\n", paste(schema$suffixes, collapse = ", ")))
     }
   }
 
-  cat("Accident Data Configuration\n")
-  cat("Path:", paste0("\"", attr(x, "path"), "\"\n"))
-
-  cat("Main data:\n")
-  cat("  File pattern:", paste0("\"", x$main_data$file_pattern, "\"\n"))
-  cat("  Columns:\n")
-  print_cols(x$main_data$columns)
-
-  cat("Sub data:\n")
-  cat("  File pattern:", paste0("\"", x$sub_data$file_pattern, "\"\n"))
-  cat("  Columns:\n")
-  print_cols(x$sub_data$columns)
-
-  cat("Highway data:\n")
-  cat("  File pattern:", paste0("\"", x$highway_data$file_pattern, "\"\n"))
-  cat("  Columns:\n")
-  print_cols(x$highway_data$columns)
+  # Column Name Mapping
+  cat("\nColumn Name Mapping:\n")
+  for (name in names(object$columns)) {
+    mapping <- object$columns[[name]]
+    cat(sprintf("  - %s: [%s]\n", name, paste(mapping, collapse = ", ")))
+  }
 }

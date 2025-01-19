@@ -7,28 +7,31 @@
 #' characters), which can be difficult to handle in programs.
 #' This function converts them to corresponding English names.
 #'
-#' @param dataset_name The name of the dataset.
 #' @param original_names A vector of original column names.
 #' @return A vector of new column names corresponding to the provided
-#'   original names.
+#'   original names, or `NA` for unmatched names.
 #' @export
-lookup_column_names <- function(dataset_name, original_names) {
-  # Retrieve column configuration for the specified dataset
-  column_config <- get_config()[[dataset_name]]$columns
+lookup_column_names <- function(original_names) {
+  # Load column name configuration
+  config <- get_config()
 
-  # Check if column configuration is available
-  if (is.null(column_config)) {
-    warning("No column configuration found for dataset: ", dataset_name)
-    return(original_names)
+  # Helper function to find a matching column name
+  find_column_name <- function(name) {
+    matches <- vapply(
+      config$columns,
+      function(column) name %in% column,
+      logical(1)
+    )
+
+    if (any(matches)) {
+      names(config$columns)[matches]
+    } else {
+      NA_character_
+    }
   }
 
-  # Extract original names and their corresponding new names
-  original_names_list <- sapply(column_config, `[[`, "original_name")
-  new_names <- setNames(
-    rep(names(original_names_list), lengths(original_names_list)),
-    unlist(original_names_list, use.names = FALSE)
-  )
+  # Apply the helper function to all provided original names
+  new_names <- vapply(original_names, find_column_name, character(1))
 
-  # Return the new names corresponding to the provided original names
-  return(unname(new_names[original_names]))
+  return(new_names)
 }

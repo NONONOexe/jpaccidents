@@ -4,16 +4,14 @@
 \alias{lookup_column_names}
 \title{Lookup new column names for an accident dataset}
 \usage{
-lookup_column_names(dataset_name, original_names)
+lookup_column_names(original_names)
 }
 \arguments{
-\item{dataset_name}{The name of the dataset.}
-
 \item{original_names}{A vector of original column names.}
 }
 \value{
 A vector of new column names corresponding to the provided
-original names.
+original names, or \code{NA} for unmatched names.
 }
 \description{
 This function retrieves the new column names corresponding to

@@ -10,10 +10,12 @@ RoxygenNote: 7.3.2
 Imports: 
     cli,
     curl,
+    dplyr,
     lubridate,
     readr,
     sf,
     stats,
+    tidyr,
     utils,
     yaml
 Suggests: 
