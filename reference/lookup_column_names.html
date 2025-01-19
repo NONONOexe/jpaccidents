@@ -57,25 +57,21 @@ This function converts them to corresponding English names.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lookup_column_names</span><span class="op">(</span><span class="va">dataset_name</span>, <span class="va">original_names</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lookup_column_names</span><span class="op">(</span><span class="va">original_names</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-dataset-name">dataset_name<a class="anchor" aria-label="anchor" href="#arg-dataset-name"></a></dt>
-<dd><p>The name of the dataset.</p></dd>
-
-
-<dt id="arg-original-names">original_names<a class="anchor" aria-label="anchor" href="#arg-original-names"></a></dt>
+<dl><dt id="arg-original-names">original_names<a class="anchor" aria-label="anchor" href="#arg-original-names"></a></dt>
 <dd><p>A vector of original column names.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A vector of new column names corresponding to the provided
-original names.</p>
+original names, or <code>NA</code> for unmatched names.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
