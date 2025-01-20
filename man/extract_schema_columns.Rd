@@ -23,6 +23,6 @@ needs to be reshaped to long format before filtering.
 }
 \examples{
 \dontrun{
-persons_info <- extract_schema_columns(accident_data, "persons_info")
+person_info <- extract_schema_columns(accident_data, "person_info")
 }
 }

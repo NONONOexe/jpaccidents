@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' persons_info <- extract_schema_columns(accident_data, "persons_info")
+#' person_info <- extract_schema_columns(accident_data, "person_info")
 #' }
 extract_schema_columns <- function(data, schema_name) {
   # Load configuration settings containing to access schema definitions
@@ -35,7 +35,7 @@ extract_schema_columns <- function(data, schema_name) {
   }
 
   # Handle specific transformation requirements for certain schemas
-  if (dataset_name == "main_data" && schema_name == "persons_info") {
+  if (dataset_name == "main_data" && schema_name == "person_info") {
     data <- pivot_longer(
       data,
       cols          = ends_with(c("_a", "_b")),
