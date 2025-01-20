@@ -22,12 +22,20 @@ post_process_highway(data)
 \item{data}{The data to be processed.}
 }
 \value{
-A processed data.
+A processed dataset as a list.
 }
 \description{
-These function perform post-processing operations on different datasets.
-\code{post_process_main} processes the main data (honhyo), separating it into
-accident and person data, and returning them as a list.
-\code{post_process_sub} and \code{post_process_highway} currently do not perform
-any modifications on sub data and highway data, respectively.
+\code{post_process()} performs post-processing on different datasets:
+\itemize{
+\item \code{post_process_main()} handles main data (honhyo) by separating it into
+accident and person data.
+\item \code{post_process_sub()} handles sub data (hojuhyo), processing
+person-related information.
+\item \code{post_process_highway()} handles highway data (kosokuhyo), extracting
+highway-related information.
+}
+}
+\details{
+These functions process the data based on its type, ensuring consistency
+and proper formatting.
 }

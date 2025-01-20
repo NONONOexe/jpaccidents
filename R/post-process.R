@@ -1,14 +1,19 @@
 #' Post-process data
 #'
-#' These function perform post-processing operations on different datasets.
-#' `post_process_main` processes the main data (honhyo), separating it into
-#' accident and person data, and returning them as a list.
-#' `post_process_sub` and `post_process_highway` currently do not perform
-#' any modifications on sub data and highway data, respectively.
+#' `post_process()` performs post-processing on different datasets:
+#'   - `post_process_main()` handles main data (honhyo) by separating it into
+#'     accident and person data.
+#'   - `post_process_sub()` handles sub data (hojuhyo), processing
+#'     person-related information.
+#'   - `post_process_highway()` handles highway data (kosokuhyo), extracting
+#'     highway-related information.
+#'
+#' These functions process the data based on its type, ensuring consistency
+#' and proper formatting.
 #'
 #' @name post_process
 #' @param data The data to be processed.
-#' @return A processed data.
+#' @return A processed dataset as a list.
 post_process <- function(data) {
   UseMethod("post_process")
 }
@@ -16,7 +21,10 @@ post_process <- function(data) {
 #' @rdname post_process
 #' @export
 post_process.accident_data <- function(data) {
+  # Extract dataset name attribute
   dataset_name <- attr(data, "dataset_name")
+
+  # Determine the appropriate post-processor function
   post_processor <- switch (
     dataset_name,
     "main_data"    = post_process_main,
@@ -27,6 +35,8 @@ post_process.accident_data <- function(data) {
       return(NULL)
     }
   )
+
+  # Process the data
   processed_data <- post_processor(data)
   attr(processed_data, "dataset_name") <- dataset_name
 
@@ -36,7 +46,7 @@ post_process.accident_data <- function(data) {
 #' @rdname post_process
 #' @export
 post_process_main <- function(data) {
-  # Convert latitude and longitude from DMS to decimal
+  # Convert coordinates from DMS to decimal
   data$latitude <- suppressWarnings(convert_deg(data$latitude))
   data$longitude <- suppressWarnings(convert_deg(data$longitude))
 
@@ -58,21 +68,30 @@ post_process_main <- function(data) {
     cli_alert_warning("Invalid coordinate format detected in file: {file_path}. {removed_rows} rows have been excluded.")
   }
 
-  # Extract accident related columns from spatial data
-  accident_info <- extract_schema_columns(location_data_sf, "accident_info")
+  # Process accident information
+  accident_info <- location_data_sf %>%
+    extract_schema_columns("accident_info") %>%
+    mutate(
+      occurrence_time = make_datetime(
+        year  = as.integer(location_data_sf$occurrence_year),
+        month = as.integer(location_data_sf$occurrence_month),
+        day   = as.integer(location_data_sf$occurrence_day),
+        hour  = as.integer(location_data_sf$occurrence_hour),
+        min   = as.integer(location_data_sf$occurrence_min),
+        tz    = "Asia/Tokyo"
+      )
+    )
 
-  # Create datetime from individual columns in the original data
-  accident_info$occurrence_time <- make_datetime(
-    year  = as.integer(location_data_sf$occurrence_year),
-    month = as.integer(location_data_sf$occurrence_month),
-    day   = as.integer(location_data_sf$occurrence_day),
-    hour  = as.integer(location_data_sf$occurrence_hour),
-    min   = as.integer(location_data_sf$occurrence_min),
-    tz    = "Asia/Tokyo"
-  )
-
-  # Extract person related columns from the original data
-  person_info <- extract_schema_columns(location_data, "person_info")
+  # Process person information
+  person_info <- location_data %>%
+    extract_schema_columns("person_info") %>%
+    mutate(
+      sub_id = case_when(
+        .data$sub_id == "a" ~ 1L,
+        .data$sub_id == "b" ~ 2L,
+        TRUE ~ NA_integer_
+      )
+    )
 
   return(list(
     accident_info = accident_info,
@@ -84,7 +103,10 @@ post_process_main <- function(data) {
 #' @rdname post_process
 #' @export
 post_process_sub <- function(data) {
-  person_info <- extract_schema_columns(data, "person_info")
+  # Extract and process person information
+  person_info <- data %>%
+    extract_schema_columns("person_info") %>%
+    mutate(sub_id = as.integer(.data$sub_id) + 2L)
 
   return(list(
     accident_info = NULL,
@@ -96,6 +118,7 @@ post_process_sub <- function(data) {
 #' @rdname post_process
 #' @export
 post_process_highway <- function(data) {
+  # Extract highway information
   highway_info <- extract_schema_columns(data, "highway_info")
 
   return(list(
