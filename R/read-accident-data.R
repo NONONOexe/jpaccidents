@@ -2,13 +2,20 @@
 #'
 #' This function reads accident data from multiple CSV files,
 #' processes each file, and combines the data into three categories:
-#'   * `accident_info`
-#'   * `person_info`
-#'   * `highway_info`
+#'   * `accident_info`: Basic accident information including date, location,
+#'     and conditions
+#'   * `person_info`: Information about individuals involved in the accidents
+#'   * `highway_info`: Information specific to accidents that occurred on
+#'     highways/expressways
 #'
 #' @param file_paths A character vector of file paths to the CSV files.
-#' @return A list containing the accident data split into three data frames:
-#'   `accident_info`, `person_info`, and `highway_info`.
+#' @param apply_post_process Logical. If `TRUE` (default), applies
+#'   post-processing steps to clean and standardize the data. IF `FALSE`
+#'   raw data frames.
+#' @return A list containing three data frames when
+#'   `apply_post_process = TRUE` (`accident_info`, `person_info`, and
+#'   `highway_info`). If `apply_post_process = FALSE`, returns either a single
+#'   data frame or a list of raw data frames (if multiple files).
 #' @export
 #' @examples
 #' \dontrun{
@@ -17,7 +24,7 @@
 #'   "example/hojuhyo_2023.csv"
 #' ))
 #' }
-read_accident_data <- function(file_paths) {
+read_accident_data <- function(file_paths, apply_post_process = TRUE) {
   # Process all files and extract valid data
   data_list <- lapply(file_paths, process_single_file)
   valid_data <- Filter(Negate(is.null), data_list)
@@ -26,6 +33,11 @@ read_accident_data <- function(file_paths) {
   # Warn about skipped files
   if (0 < length(skipped_files)) {
     cli_alert_warning("The following files were skipped because their format is not supported: {skipped_files}")
+  }
+
+  # Return raw data if post-processing is disabled
+  if (!apply_post_process) {
+    return(if (length(valid_data) == 1) valid_data[[1]] else valid_data)
   }
 
   # Post-process valid data
@@ -74,14 +86,7 @@ rename_columns <- function(data) {
 combine_data <- function(data_list, schema_name) {
   filtered_data <- Filter(
     Negate(is.null),
-    lapply(data_list, function(x) {
-      if (is.data.frame(x) && attr(x, "schema_name") == schema_name) {
-        return(x)
-      } else {
-        return(x[[schema_name]])
-      }
-      NULL
-    })
+    lapply(data_list, `[[`, schema_name)
   )
   return(do.call(bind_rows, filtered_data))
 }

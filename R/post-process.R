@@ -74,23 +74,33 @@ post_process_main <- function(data) {
   # Extract person related columns from the original data
   person_info <- extract_schema_columns(location_data, "person_info")
 
-  # Combine process accident and person data into a list
-  processed_data <- list(
+  return(list(
     accident_info = accident_info,
-    person_info = person_info
-  )
-
-  return(processed_data)
+    person_info   = person_info,
+    highway_info  = NULL
+  ))
 }
 
 #' @rdname post_process
 #' @export
 post_process_sub <- function(data) {
-  return(extract_schema_columns(data, "person_info"))
+  person_info <- extract_schema_columns(data, "person_info")
+
+  return(list(
+    accident_info = NULL,
+    person_info   = person_info,
+    highway_info  = NULL
+  ))
 }
 
 #' @rdname post_process
 #' @export
 post_process_highway <- function(data) {
-  return(extract_schema_columns(data, "highway_info"))
+  highway_info <- extract_schema_columns(data, "highway_info")
+
+  return(list(
+    accident_info = NULL,
+    person_info   = NULL,
+    highway_info  = highway_info
+  ))
 }

@@ -4,22 +4,30 @@
 \alias{read_accident_data}
 \title{Read accident data from CSV files}
 \usage{
-read_accident_data(file_paths)
+read_accident_data(file_paths, apply_post_process = TRUE)
 }
 \arguments{
 \item{file_paths}{A character vector of file paths to the CSV files.}
+
+\item{apply_post_process}{Logical. If \code{TRUE} (default), applies
+post-processing steps to clean and standardize the data. IF \code{FALSE}
+raw data frames.}
 }
 \value{
-A list containing the accident data split into three data frames:
-\code{accident_info}, \code{person_info}, and \code{highway_info}.
+A list containing three data frames when
+\code{apply_post_process = TRUE} (\code{accident_info}, \code{person_info}, and
+\code{highway_info}). If \code{apply_post_process = FALSE}, returns either a single
+data frame or a list of raw data frames (if multiple files).
 }
 \description{
 This function reads accident data from multiple CSV files,
 processes each file, and combines the data into three categories:
 \itemize{
-\item \code{accident_info}
-\item \code{person_info}
-\item \code{highway_info}
+\item \code{accident_info}: Basic accident information including date, location,
+and conditions
+\item \code{person_info}: Information about individuals involved in the accidents
+\item \code{highway_info}: Information specific to accidents that occurred on
+highways/expressways
 }
 }
 \examples{
