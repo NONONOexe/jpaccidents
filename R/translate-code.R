@@ -1,16 +1,13 @@
 #' Translate codes to human-readable labels using configuration data
 #'
 #' `translate_code()` translates codes to their corresponding human-readable
-#' labels based on the configuration data. It supports English and Japanese
-#' languages. If the code is not found in the configuration data, it will
-#' issue a warning and return `NA`.
+#' labels based on the configuration data. If the code is not found in the
+#' configuration data, it will issue a warning and return `NA`.
 #'
 #' @param code A character vector of codes to be converted to labels.
 #' @param concept A string specifying the concept category
 #'   (e.g., "impact_part")
-#' @param lang A string specifying the output language. Default is "en".
-#'   Supported values are "en" (English) and "ja" (Japanese).
-#' @return A character vector of the same length as the input `codes`,
+#' @return A character vector of the same length as the input `code`,
 #'   containing the corresponding labels. Invalid codes are converted to `NA`
 #'   with a warning.
 #' @export
@@ -21,13 +18,10 @@
 #' # Convert multiple codes
 #' translate_code(c("1", "2"), "impact_part")
 #'
-#' # Convert codes with Japanese labels
-#' translate_code("1", "impact_part", "ja")
-#'
 #' # Handle invalid codes
 #' translate_code(c("1", "999"), "impact_part")
 #'
-translate_code <- function(code, concept, lang = "en") {
+translate_code <- function(code, concept) {
   # Get configuration
   config <- get_config()
 
@@ -36,7 +30,7 @@ translate_code <- function(code, concept, lang = "en") {
 
   # Create lookup table
   lookup <- setNames(
-    sapply(concept_config, function(x) x$names[[lang]], USE.NAMES = FALSE),
+    sapply(concept_config, function(x) x$label, USE.NAMES = FALSE),
     sapply(concept_config, function(x) x$code, USE.NAMES = FALSE)
   )
 

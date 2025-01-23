@@ -1,7 +1,7 @@
 metadata:
-  version: "0.1.0"
-  last_updated: "2025-01-18"
-  author: "Keisuke ANDO"
+  version: "0.1.1"
+  last_updated: "2025-01-23"
+  author: "Keisuke Ando"
 
 # File type definitions
 file_types:
@@ -171,7 +171,7 @@ schemas:
       - prefecture_code
       - police_code
       - main_id
-      - sub_id
+      - party_order
     data_columns:
       - stop_sign
       - stop_mark
@@ -182,7 +182,8 @@ schemas:
       - automatic_car
       - support_car
       - speed_limit
-      - impact_part
+      - primary_impact
+      - secondary_impact
       - damage_level
       - airbag
       - side_airbag
@@ -408,59 +409,116 @@ columns:
 concepts:
   document_type:
     main:
-      codes: "1"
-      names:
-        en: "main"
+      code: "1"
+      label: "main"
+      display:
+        en: "Main Document"
         jp: "本票"
     sub:
-      codes: "2"
-      names:
-        en: "sub"
+      code: "2"
+      label: "sub"
+      display:
+        en: "Supplementary Document"
         jp: "補充票"
     highway:
-      codes: "3"
-      names:
-        en: "highway"
+      code: "3"
+      label: "highway"
+      display:
+        en: "Highway Document"
         jp: "高速票"
 
+  collision_position:
+     single_road:
+       code: "01"
+       label: "single_road"
+       display:
+         en: "Single Road"
+         jp: "単路"
+     intersection:
+       code: "30"
+       label: "intersection"
+       display:
+         en: "Intersection"
+         jp: "交差点"
+     other:
+       code: "20"
+       label: "other"
+       display:
+         en: "Other"
+         jp: "その他"
+
+  impact_type:
+    vehicle_to_pedestrian:
+      code: "01"
+      label: "vehicle_to_pedestrian"
+      display:
+        en: "Vehicle to Pedestrian"
+        jp: "人対車両"
+    vehicle_to_vehicle:
+      code: "04"
+      label: "vehicle_to_vehicle"
+      display:
+        en: "Vehicle to Vehicle"
+        jp: "車両相互"
+    single_vehicle:
+      code: "28"
+      label: "single_vehicle"
+      display:
+        en: "Single Vehicle"
+        jp: "車両単独"
+
   impact_part:
+    no_impact:
+      code: "0"
+      label: "no_impact"
+      display:
+        en: "No Impact"
+        jp: "衝突痕なし"
     front:
-      codes: "1"
-      names:
-        en: "front"
+      code: "1"
+      label: "front"
+      display:
+        en: "Front"
         jp: "前方"
     right:
-      codes: "2"
-      names:
-        en: "right"
+      code: "2"
+      label: "right"
+      display:
+        en: "Right"
         jp: "右方"
     rear:
-      codes: "3"
-      names:
-        en: "rear"
+      code: "3"
+      label: "rear"
+      display:
+        en: "Rear"
         jp: "後方"
     left:
-      codes: "4"
-      names:
-        en: "left"
+      code: "4"
+      label: "left"
+      display:
+        en: "Left"
         jp: "左方"
     front_right:
-      codes: "5"
-      names:
-        en: "front_right"
+      code: "5"
+      label: "front_right"
+      display:
+        en: "Front Right"
         jp: "前方右"
     rear_right:
-      codes: "6"
-      names:
-        en: "rear_right"
+      code: "6"
+      label: "rear_right"
+      display:
+        en: "Rear Right"
         jp: "後方右"
     rear_left:
-      codes: "7"
-      names:
-        en: "rear_left"
+      code: "7"
+      label: "rear_left"
+      display:
+        en: "Rear Left"
         jp: "後方左"
     front_left:
-      codes: "8"
-      names:
-        en: "front_left"
+      code: "8"
+      label: "front_left"
+      display:
+        en: "Front Left"
         jp: "前方左"
