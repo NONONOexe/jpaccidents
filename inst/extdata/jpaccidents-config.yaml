@@ -455,17 +455,23 @@ concepts:
         en: "Vehicle to Pedestrian"
         jp: "人対車両"
     vehicle_to_vehicle:
-      code: "04"
+      code: ["04", "21"]
       label: "vehicle_to_vehicle"
       display:
         en: "Vehicle to Vehicle"
         jp: "車両相互"
     single_vehicle:
-      code: "28"
+      code: ["28", "41"]
       label: "single_vehicle"
       display:
         en: "Single Vehicle"
         jp: "車両単独"
+    train:
+      code: "61"
+      label: "train"
+      display:
+        en: "Train"
+        jp: "列車"
 
   impact_part:
     no_impact:

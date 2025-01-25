@@ -70,8 +70,8 @@ post_process_main <- function(data) {
 
   # Process accident information
   accident_info <- location_data_sf %>%
-    extract_schema_columns("accident_info") %>%
     mutate(
+      document_type   = translate_codes(.data$document_type, "document_type"),
       occurrence_time = make_datetime(
         year  = as.integer(location_data_sf$occurrence_year),
         month = as.integer(location_data_sf$occurrence_month),
@@ -79,19 +79,34 @@ post_process_main <- function(data) {
         hour  = as.integer(location_data_sf$occurrence_hour),
         min   = as.integer(location_data_sf$occurrence_min),
         tz    = "Asia/Tokyo"
-      )
-    )
+      ),
+      impact_type     = translate_codes(.data$impact_type, "impact_type")
+    ) %>%
+    extract_schema_columns("accident_info")
 
   # Process person information
   person_info <- location_data %>%
-    extract_schema_columns("person_info") %>%
+    pivot_longer(
+      cols          = ends_with(c("_a", "_b")),
+      names_to      = c(".value", "sub_id"),
+      names_pattern = "^(.+)[_]([a|b])$"
+    ) %>%
     mutate(
-      sub_id = case_when(
+      party_order = case_when(
         .data$sub_id == "a" ~ 1L,
         .data$sub_id == "b" ~ 2L,
         TRUE ~ NA_integer_
-      )
-    )
+      ),
+      primary_impact   = substr(.data$impact_part, 1, 1),
+      secondary_impact = substr(.data$impact_part, 2, 2)
+    ) %>%
+    mutate(
+      document_type    = translate_codes(.data$document_type, "document_type"),
+      primary_impact   = translate_codes(.data$primary_impact, "impact_part"),
+      secondary_impact = translate_codes(.data$secondary_impact, "impact_part")
+    ) %>%
+    set_attr("dataset_name", attr(data, "dataset_name")) %>%
+    extract_schema_columns("person_info")
 
   return(list(
     accident_info = accident_info,
@@ -105,8 +120,8 @@ post_process_main <- function(data) {
 post_process_sub <- function(data) {
   # Extract and process person information
   person_info <- data %>%
-    extract_schema_columns("person_info") %>%
-    mutate(sub_id = as.integer(.data$sub_id) + 2L)
+    mutate(party_order = as.integer(.data$sub_id) + 2L) %>%
+    extract_schema_columns("person_info")
 
   return(list(
     accident_info = NULL,

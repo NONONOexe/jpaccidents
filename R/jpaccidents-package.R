@@ -12,6 +12,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom lubridate make_datetime
 #' @importFrom magrittr %>%
+#' @importFrom magrittr set_attr
 #' @importFrom readr cols
 #' @importFrom readr locale
 #' @importFrom readr read_csv
