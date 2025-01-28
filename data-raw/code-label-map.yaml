@@ -1,0 +1,138 @@
+# Mapping of coded values in traffic accident data to human-readable labels
+#
+# This file provides mappings for converting coded values in traffic accident
+# data into human-readable labels. The mappings are organized by categories
+# such as document type, collision position, and impact type. Each category
+# contains a set of codes, their corresponding labels, and display names in
+# both English and Japanese.
+#
+# Fields:
+#   - `code`    : Represents the coded value in the data. It can be a string or
+#                 an array of strings. If it's an array, it indicates that
+#                 multiple codes map to same meaning.
+#   - `label`   : A string used internally by the program to identify the
+#                 concept.
+#   - `display` : Human-readable labels for display in the application.
+#                 Supported languages are English (`en`) and Japanese (`ja`).
+categories:
+  document_type:
+    main:
+      code: "1"
+      label: "main"
+      display:
+        en: "Main Document"
+        ja: "本票"
+    sub:
+      code: "2"
+      label: "sub"
+      display:
+        en: "Supplementary Document"
+        ja: "補充票"
+    highway:
+      code: "3"
+      label: "highway"
+      display:
+        en: "Highway Document"
+        ja: "高速票"
+
+  collision_position:
+    single_road:
+      code: "01"
+      label: "single_road"
+      display:
+        en: "Single Road"
+        ja: "単路"
+    intersection:
+      code: "30"
+      label: "intersection"
+      display:
+        en: "Intersection"
+        ja: "交差点"
+    other:
+      code: "20"
+      label: "other"
+      display:
+        en: "Other"
+        ja: "その他"
+
+  impact_type:
+    vehicle_to_pedestrian:
+      code: "01"
+      label: "vehicle_to_pedestrian"
+      display:
+        en: "Vehicle to Pedestrian"
+        ja: "人対車両"
+    vehicle_to_vehicle:
+      code: ["04", "21"]
+      label: "vehicle_to_vehicle"
+      display:
+        en: "Vehicle to Vehicle"
+        ja: "車両相互"
+    single_vehicle:
+      code: ["28", "41"]
+      label: "single_vehicle"
+      display:
+        en: "Single Vehicle"
+        ja: "車両単独"
+    train:
+      code: "61"
+      label: "train"
+      display:
+        en: "Train"
+        ja: "列車"
+
+  impact_part:
+    no_impact:
+      code: "0"
+      label: "no_impact"
+      display:
+        en: "No Impact"
+        ja: "衝突痕なし"
+    front:
+      code: "1"
+      label: "front"
+      display:
+        en: "Front"
+        ja: "前方"
+    right:
+      code: "2"
+      label: "right"
+      display:
+        en: "Right"
+        ja: "右方"
+    rear:
+      code: "3"
+      label: "rear"
+      display:
+        en: "Rear"
+        ja: "後方"
+    left:
+      code: "4"
+      label: "left"
+      display:
+        en: "Left"
+        ja: "左方"
+    front_right:
+      code: "5"
+      label: "front_right"
+      display:
+        en: "Front Right"
+        ja: "前方右"
+    rear_right:
+      code: "6"
+      label: "rear_right"
+      display:
+        en: "Rear Right"
+        ja: "後方右"
+    rear_left:
+      code: "7"
+      label: "rear_left"
+      display:
+        en: "Rear Left"
+        ja: "後方左"
+    front_left:
+      code: "8"
+      label: "front_left"
+      display:
+        en: "Front Left"
+        ja: "前方左"

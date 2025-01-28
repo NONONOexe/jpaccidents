@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-What the package does (one paragraph).
+In Japan, traffic accident data are published by the National Police Agency. This package provides tools to efficiently handle and standardise these datasets, facilitating seamless analysis and integration into various workflows. By using this package, users can uncover patterns in traffic accidents and identify high-risk scenarios, supporting efforts to enhance road safety and prevent future incidents.
 }
 \seealso{
 Useful links:
@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Keisuke ANDO \email{ando@maslab.aitech.ac.jp}
+\strong{Maintainer}: Keisuke Ando \email{ando@maslab.aitech.ac.jp}
 
 }
 \keyword{internal}

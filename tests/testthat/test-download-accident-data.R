@@ -3,7 +3,7 @@ test_that("`download_accident_data` works with valid inputs", {
     file.copy(mock_accident_data_path, destfiles, overwrite = TRUE)
 
     return(destfiles)
-  })
+  }, .package = "curl")
 
   # Test with "main" data type
   downloaded_file_path <- suppressMessages(
@@ -13,9 +13,9 @@ test_that("`download_accident_data` works with valid inputs", {
   expect_true(file.exists(downloaded_file_path))
   expect_match(downloaded_file_path, "honhyo_2022[.]csv$")
 
-  # Test with "sub" data type
+  # Test with "supp" data type
   downloaded_file_path <- suppressMessages(
-    download_accident_data("sub", temp_dir, 2021)
+    download_accident_data("supp", temp_dir, 2021)
   )
   expect_true(file.exists(downloaded_file_path))
   expect_match(downloaded_file_path, "hojuhyo_2021[.]csv$")
@@ -32,7 +32,7 @@ test_that("`download_accident_data` works with valid inputs", {
 test_that("`download_accident_data` handles invalid data types", {
   expect_error(
     download_accident_data("invalid", temp_dir, 2022),
-    "Invalid type. Please specify one of: main, sub, and highway."
+    "Invalid type. Please specify one of: main, supp, and highway."
   )
 })
 

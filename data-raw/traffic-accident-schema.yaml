@@ -1,0 +1,88 @@
+# Schema definition for traffic accident data
+#
+# This file defines the structure of the data related to traffic accidents.
+# The data is grouped into three categories:
+#   * accident_info: Information about the accident itself,
+#                    such as date, location, weather and severity.
+#   * person_info  : Information about the parties involved in the accident,
+#                    such as party order, age, and vehicle details.
+#   * highway_info : Information about the highway where the accident occurred,
+#                    such as kilopost number, road administrator, and
+#                    curve radius.
+data_schema:
+  accident_info:
+    - document_type
+    - prefecture_code
+    - police_code
+    - main_id
+    - injury_pattern
+    - fatality_number
+    - injury_number
+    - road_code
+    - road_direction
+    - kilopost_number
+    - city_code
+    - occurrence_time
+    - day_night
+    - sunrise_hour
+    - sunrise_min
+    - sunset_hour
+    - sunset_min
+    - weather
+    - roundabout_diameter
+    - region_type
+    - road_surface
+    - road_shape
+    - traffic_signal
+    - road_width
+    - road_alignment
+    - collision_position
+    - zone_regulation
+    - center_divider
+    - road_verge
+    - impact_type
+    - day_of_week
+    - holiday
+    - geometry
+
+  person_info:
+    - document_type
+    - prefecture_code
+    - police_code
+    - main_id
+    - party_order
+    - stop_sign
+    - stop_mark
+    - age
+    - party_type
+    - use_type
+    - car_type
+    - automatic_car
+    - support_car
+    - speed_limit
+    - primary_impact
+    - secondary_impact
+    - damage_level
+    - airbag
+    - side_airbag
+    - injury_level
+    - cognitive_test
+    - driving_practice
+
+  highway_info:
+    - document_type
+    - prefecture_code
+    - police_code
+    - main_id
+    - kilopost_number
+    - road_manager
+    - highway_type
+    - curve_radius
+    - longitudinal_slope
+    - tunnel_number
+    - car_count
+    - impact_type
+    - damaged_property
+    - limit_type
+    - temp_limit
+    - tunnel_length

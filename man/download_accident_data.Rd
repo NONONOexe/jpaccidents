@@ -7,36 +7,42 @@
 download_accident_data(type, download_dir = getwd(), years = 2023)
 }
 \arguments{
-\item{type}{Type of data to download: one of "main", "sub", or "highway".}
+\item{type}{A character string specifying the type of data to download:
+one of "main", "supp", or "highway".}
 
-\item{download_dir}{A directory where downloaded file is to saved
-(default: \code{getwd()}).}
+\item{download_dir}{A character string specifying the directory to save the
+downloaded files (default: \code{getwd()}).}
 
-\item{years}{Years the traffic accident data were recorded.
-Available from 2019 to 2023. You can specify a single year or
-vector of years(default: \code{2023}).}
+\item{years}{An integer or vector of integers specifying the years of the
+data to download. Available years are 2019 to 2023 (default: \code{2023}).}
 }
 \value{
-Path of the downloaded file (invisibly).
+A character vector of file paths for the downloaded files
+(invisibly).
 }
 \description{
-Download the file of traffic accident data provided
-\href{https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html}{the National Police Agency's Web page}.
+\code{download_accident_data()} downloads the file of traffic accident data
+provided the \href{https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html}{National Police Agency}.
 }
 \details{
 The traffic accident data are divided into the following types:
 \itemize{
-\item "main" (honhyo): Basic data on traffic accidents.
-\item "sub" (hojuhyo): Additional data related to the "main" data.
-\item "highway" (kosokuhyo): Data on traffic accidents on highways.
+\item \code{"main"}    : Basic data on traffic accidents (honhyo).
+\item \code{"supp"}    : Additional data related to the \code{"main"} data (hojuhyo).
+\item \code{"highway"} : Data on traffic accidents on highways (kosokuhyo).
 }
 
-You can specify the type of data directly via the \code{type} argument.
+Use the \code{type} argument to specify which data type to download.
 }
 \examples{
 \dontrun{
+# Download the main data for 2023
 download_accident_data("main", "download-dir-path", 2023)
-download_accident_data("sub", "download-dir-path", 2023)
-download_accident_data("highway", "download-dir-path", 2023)
+
+# Download the supplementary data for 2023
+download_accident_data("supp", "download-dir-path", 2023)
+
+# Download the highway data for 2019 to 2023
+download_accident_data("highway", "download-dir-path", 2019:2023)
 }
 }

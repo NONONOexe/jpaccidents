@@ -1,31 +1,36 @@
 Package: jpaccidents
 Title: Tools for Traffic Accident Data in Japan
-Version: 0.1.5
+Version: 0.2.0
 Authors@R: 
-    person("Keisuke", "ANDO", "", "ando@maslab.aitech.ac.jp", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+    person("Keisuke", "Ando", , "ando@maslab.aitech.ac.jp", role = c("aut", "cre"))
+Description: In Japan, traffic accident data are published by the National
+    Police Agency. This package provides tools to efficiently handle and
+    standardise these datasets, facilitating seamless analysis and
+    integration into various workflows. By using this package, users can
+    uncover patterns in traffic accidents and identify high-risk
+    scenarios, supporting efforts to enhance road safety and prevent
+    future incidents.
+License: MIT + file LICENSE
+URL: https://nononoexe.github.io/jpaccidents/
+Depends: 
+    R (>= 4.0)
 Imports: 
     cli,
     curl,
     dplyr,
+    fs,
     lubridate,
     magrittr,
+    purrr,
     readr,
     rlang,
     sf,
-    stats,
-    tidyr,
-    utils,
-    yaml
+    stringr,
+    tidyr
 Suggests: 
-    testthat (>= 3.0.0),
-    withr
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Depends: 
-    R (>= 4.0)
+Encoding: UTF-8
 LazyData: true
-License: MIT + file LICENSE
-URL: https://nononoexe.github.io/jpaccidents/
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

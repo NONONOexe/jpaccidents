@@ -1,0 +1,284 @@
+# Mapping of column names for traffic accident data
+#
+# The `original` field contains the original column names in Japanese,
+# as provided by the Japanese National Police Agency's traffic accident
+# statistics.
+# The `transformed` field contains the corresponding column names transformed
+# into a more program-friendly format (snake_case in English).
+column_names:
+  document_type:
+    transformed: "document_type"
+    original: "資料区分"
+  prefecture_code:
+    transformed: "prefecture_code"
+    original: "都道府県コード"
+  police_code:
+    transformed: "police_code"
+    original: "警察署等コード"
+  main_id:
+    transformed: "main_id"
+    original: "本票番号"
+  injury_pattern:
+    transformed: "injury_pattern"
+    original: "事故内容"
+  fatality_number:
+    transformed: "fatality_number"
+    original: "死者数"
+  injury_number:
+    transformed: "injury_number"
+    original: "負傷者数"
+  road_code:
+    transformed: "road_code"
+    original: "路線コード"
+  road_direction:
+    transformed: "road_direction"
+    original: "上下線"
+  kilopost_number:
+    transformed: "kilopost_number"
+    original: ["地点コード", "発生地点"]
+  city_code:
+    transformed: "city_code"
+    original: "市区町村コード"
+  occurrence_year:
+    transformed: "occurrence_year"
+    original: "発生日時　　年"
+  occurrence_month:
+    transformed: "occurrence_month"
+    original: "発生日時　　月"
+  occurrence_day:
+    transformed: "occurrence_day"
+    original: "発生日時　　日"
+  occurrence_hour:
+    transformed: "occurrence_hour"
+    original: "発生日時　　時"
+  occurrence_min:
+    transformed: "occurrence_min"
+    original: "発生日時　　分"
+  day_night:
+    transformed: "day_night"
+    original: "昼夜"
+  sunrise_hour:
+    transformed: "sunrise_hour"
+    original: "日の出時刻　　時"
+  sunrise_min:
+    transformed: "sunrise_min"
+    original: "日の出時刻　　分"
+  sunset_hour:
+    transformed: "sunset_hour"
+    original: "日の入り時刻　　時"
+  sunset_min:
+    transformed: "sunset_min"
+    original: "日の入り時刻　　分"
+  weather:
+    transformed: "weather"
+    original: "天候"
+  roundabout_diameter:
+    transformed: "roundabout_diameter"
+    original: "環状交差点の直径"
+  region_type:
+    transformed: "region_type"
+    original: "地形"
+  road_surface:
+    transformed: "road_surface"
+    original: "路面状態"
+  road_shape:
+    transformed: "road_shape"
+    original: "道路形状"
+  traffic_signal:
+    transformed: "traffic_signal"
+    original: "信号機"
+  stop_sign_a:
+    transformed: "stop_sign_a"
+    original: "一時停止規制　標識（当事者A）"
+  stop_mark_a:
+    transformed: "stop_mark_a"
+    original: "一時停止規制　表示（当事者A）"
+  stop_sign_b:
+    transformed: "stop_sign_b"
+    original: "一時停止規制　標識（当事者B）"
+  stop_mark_b:
+    transformed: "stop_mark_b"
+    original: "一時停止規制　表示（当事者B）"
+  road_width:
+    transformed: "road_width"
+    original: "車道幅員"
+  road_alignment:
+    transformed: "road_alignment"
+    original: "道路線形"
+  collision_position:
+    transformed: "collision_position"
+    original: "衝突地点"
+  zone_regulation:
+    transformed: "zone_regulation"
+    original: "ゾーン規制"
+  center_divider:
+    transformed: "center_divider"
+    original: "中央分離帯施設等"
+  road_verge:
+    transformed: "road_verge"
+    original: "歩車道区分"
+  impact_type:
+    transformed: "impact_type"
+    original: "事故類型"
+  age_a:
+    transformed: "age_a"
+    original: "年齢（当事者A）"
+  age_b:
+    transformed: "age_b"
+    original: "年齢（当事者B）"
+  party_type_a:
+    transformed: "party_type_a"
+    original: "当事者種別（当事者A）"
+  party_type_b:
+    transformed: "party_type_b"
+    original: "当事者種別（当事者B）"
+  use_type_a:
+    transformed: "use_type_a"
+    original: "用途別（当事者A）"
+  use_type_b:
+    transformed: "use_type_b"
+    original: "用途別（当事者B）"
+  car_type_a:
+    transformed: "car_type_a"
+    original: ["車両形状（当事者A）", "車両形状等（当事者A）"]
+  car_type_b:
+    transformed: "car_type_b"
+    original: ["車両形状（当事者B）", "車両形状等（当事者B）"]
+  automatic_car_a:
+    transformed: "automatic_car_a"
+    original: "オートマチック車（当事者A）"
+  automatic_car_b:
+    transformed: "automatic_car_b"
+    original: "オートマチック車（当事者B）"
+  support_car_a:
+    transformed: "support_car_a"
+    original: "サポカー（当事者A）"
+  support_car_b:
+    transformed: "support_car_b"
+    original: "サポカー（当事者B）"
+  speed_limit_a:
+    transformed: "speed_limit_a"
+    original: "速度規制（指定のみ）（当事者A）"
+  speed_limit_b:
+    transformed: "speed_limit_b"
+    original: "速度規制（指定のみ）（当事者B）"
+  impact_part_a:
+    transformed: "impact_part_a"
+    original: "車両の衝突部位（当事者A）"
+  impact_part_b:
+    transformed: "impact_part_b"
+    original: "車両の衝突部位（当事者B）"
+  damage_level_a:
+    transformed: "damage_level_a"
+    original: "車両の損壊程度（当事者A）"
+  damage_level_b:
+    transformed: "damage_level_b"
+    original: "車両の損壊程度（当事者B）"
+  airbag_a:
+    transformed: "airbag_a"
+    original: "エアバッグの装備（当事者A）"
+  airbag_b:
+    transformed: "airbag_b"
+    original: "エアバッグの装備（当事者B）"
+  side_airbag_a:
+    transformed: "side_airbag_a"
+    original: "サイドエアバッグの装備（当事者A）"
+  side_airbag_b:
+    transformed: "side_airbag_b"
+    original: "サイドエアバッグの装備（当事者B）"
+  injury_level_a:
+    transformed: "injury_level_a"
+    original: "人身損傷程度（当事者A）"
+  injury_level_b:
+    transformed: "injury_level_b"
+    original: "人身損傷程度（当事者B）"
+  latitude:
+    transformed: "latitude"
+    original: "地点　緯度（北緯）"
+  longitude:
+    transformed: "longitude"
+    original: "地点　経度（東経）"
+  day_of_week:
+    transformed: "day_of_week"
+    original: "曜日(発生年月日)"
+  holiday:
+    transformed: "holiday"
+    original: "祝日(発生年月日)"
+  cognitive_test_a:
+    transformed: "cognitive_test_a"
+    original: "認知機能検査経過日数（当事者A）"
+  cognitive_test_b:
+    transformed: "cognitive_test_b"
+    original: "認知機能検査経過日数（当事者B）"
+  driving_practice_a:
+    transformed: "driving_practice_a"
+    original: "運転練習の方法（当事者A）"
+  driving_practice_b:
+    transformed: "driving_practice_b"
+    original: "運転練習の方法（当事者B）"
+  supplementary_id:
+    transformed: "supplementary_id"
+    original: "補充票番号"
+  party_type:
+    transformed: "party_type"
+    original: "当事者種別"
+  use_type:
+    transformed: "use_type"
+    original: "用途別"
+  car_type:
+    transformed: "car_type"
+    original: "車両形状等"
+  boarding_type:
+    transformed: "boarding_type"
+    original: "乗車別"
+  boarding_tag:
+    transformed: "boarding_tag"
+    original: "乗車等の区分"
+  support_car:
+    transformed: "support_car"
+    original: "サポカー"
+  airbag:
+    transformed: "airbag"
+    original: "エアバッグの装備"
+  side_airbag:
+    transformed: "side_airbag"
+    original: "サイドエアバッグの装備"
+  injury_level:
+    transformed: "injury_level"
+    original: "人身損傷程度"
+  impact_part:
+    transformed: "impact_part"
+    original: "車両の衝突部位"
+  damage_level:
+    transformed: "damage_level"
+    original: "車両の損壊程度"
+  road_manager:
+    transformed: "road_manager"
+    original: "道路管理者区分"
+  highway_type:
+    transformed: "highway_type"
+    original: "道路区分"
+  curve_radius:
+    transformed: "curve_radius"
+    original: "曲線半径"
+  longitudinal_slope:
+    transformed: "longitudinal_slope"
+    original: "縦断勾配"
+  tunnel_number:
+    transformed: "tunnel_number"
+    original: "トンネル番号"
+  car_count:
+    transformed: "car_count"
+    original: "当事者車両台数"
+  damaged_property:
+    transformed: "damaged_property"
+    original: "車両単独事故の対象物"
+  limit_type:
+    transformed: "limit_type"
+    original: "臨時速度規制の有無"
+  temp_limit:
+    transformed: "temp_limit"
+    original: "速度規制（臨時のみ）"
+  tunnel_length:
+    transformed: "tunnel_length"
+    original: "トンネル延長距離"
