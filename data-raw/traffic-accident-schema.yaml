@@ -75,14 +75,12 @@ data_schema:
     prefecture_code: string
     police_code: string
     report_number: integer
-    kilopost_number: string
     road_manager: string
     highway_type: string
     curve_radius: string
     longitudinal_slope: string
     tunnel_number: string
     car_count: string
-    impact_type: string
     damaged_property: string
     limit_type: string
     temp_limit: string

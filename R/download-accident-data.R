@@ -58,11 +58,11 @@ download_accident_data <- function(type, download_dir = getwd(), years = 2023) {
   destination_files <- file.path(download_dir, basename(urls))
 
   # Download the files
-  downloaded_files <- curl::multi_download(urls, destination_files)
+  curl::multi_download(urls, destination_files)
   cli::cli_alert_success(c(
     "Successfully downloaded {length(destination_files)} file(s) to ",
     "{download_dir}"
   ))
 
-  return(invisible(downloaded_files))
+  return(invisible(destination_files))
 }
