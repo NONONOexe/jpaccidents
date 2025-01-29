@@ -51,10 +51,11 @@ downloaded_path <- download_accident_main_data(download_dir = "download-dir-path
 main_data <- read_accident_main_data(downloaded_path)
 ```
 
-There are three types of traffic accident data: main (honhyo), sub
-(hojyuhyo), and highway (kosokuhyo) data. The package provides functions
-for each of these. Use the function appropriate for the data you need.
-See also `? download_accident_main_data` for more information.
+There are three types of traffic accident data: main (honhyo),
+supplementary (hojyuhyo), and highway (kosokuhyo) data. The package
+provides functions for each of these. Use the function appropriate for
+the data you need. See also `? download_accident_main_data` for more
+information.
 
 > 交通事故のデータは本票、補充票、高速票の3種類があります。
 > それぞれに対応する関数が用意されています。
