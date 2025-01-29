@@ -78,6 +78,7 @@ check_file_exists <- function(file_paths) {
   return(file_paths[file_exists])
 }
 
+# Extract years from file paths
 extract_years_from_paths <- function(file_paths) {
   extracted_years <- as.integer(stringr::str_match(
     file_paths,
@@ -87,6 +88,7 @@ extract_years_from_paths <- function(file_paths) {
   return(extracted_years)
 }
 
+# Notify about invalid files
 notify_invalid_files <- function(files, issue) {
   cli::cli_alert_warning(
     "Skipping file(s) due to invalid {issue}: {.file {files}}."
@@ -107,7 +109,8 @@ read_accident_file <- function(file_path) {
       locale         = readr::locale(encoding = "Shift_JIS"),
       show_col_types = FALSE
     ) %>%
-    dplyr::rename_with(standardise_column_name)
+    dplyr::rename_with(standardise_column_name) %>%
+    dplyr::mutate(report_year = extract_years_from_paths(file_path))
 
   # Add file type attribute
   attr(raw_data, "file_type") <- detect_file_types(file_path)
@@ -116,10 +119,12 @@ read_accident_file <- function(file_path) {
   return(raw_data)
 }
 
+# Standardise column names
 standardise_column_name <- function(column_names) {
   column_name_map[column_names]
 }
 
+# Detect file types
 detect_file_types <- function(file_paths) {
   data_names <- stringr::str_match(
     file_paths,
@@ -144,27 +149,24 @@ detect_file_types <- function(file_paths) {
 #' @return List of processed data frames
 #' @keywords internal
 tidy_accident_data <- function(raw_data) {
-  data_processor <- switch(
-    attr(raw_data, "file_type"),
-    main    = process_main_data,
-    supp    = process_supplementary_data,
-    highway = process_highway_data
-  )
+  processor <- switch(attr(raw_data, "file_type"),
+                      main    = process_main_data,
+                      supp    = process_supplementary_data,
+                      highway = process_highway_data)
 
-  return(data_processor(raw_data))
+  return(processor(raw_data))
 }
 
 # Process main accident records
 process_main_data <- function(main_data) {
   processed_main <- main_data %>%
-    transform_coordinates() %>%
-    create_datetime_field()
+    convert_numeric_fields() %>%
+    process_datetime_fields() %>%
+    process_coordinates()
 
-  # Split into accident and person information
-  return(list(
+  return(make_accident_data(
     accident_info = extract_accident_info(processed_main),
-    person_info   = extract_person_info(processed_main),
-    highway_info  = NULL
+    person_info   = extract_person_info(processed_main)
   ))
 }
 
@@ -172,84 +174,33 @@ process_main_data <- function(main_data) {
 process_supplementary_data <- function(supp_data) {
   person_info <- supp_data %>%
     dplyr::mutate(party_order = as.integer(.data$supplementary_id) + 2L) %>%
+    convert_numeric_fields() %>%
     dplyr::select(dplyr::any_of(person_info_columns)) %>%
     apply_code_labels()
 
-  return(list(
-    accident_info = NULL,
-    person_info   = person_info,
-    highway_info  = NULL
-  ))
+  return(make_accident_data(person_info = person_info))
 }
 
 # Process highway-specific records
 process_highway_data <- function(highway_data) {
   highway_info <- highway_data %>%
+    convert_numeric_fields() %>%
     dplyr::select(dplyr::any_of(highway_info_columns)) %>%
     apply_code_labels()
 
-  return(list(
-    accident_info = NULL,
-    person_info   = NULL,
-    highway_info  = highway_info
-  ))
+  return(make_accident_data(highway_info = highway_info))
 }
 
-transform_coordinates <- function(data) {
-  # Validate required columns
-  require_columns <- c("latitude", "longitude")
-  if (!all(require_columns %in% colnames(data))) {
-    cli::cli_abort("Data must contain {.code latitude} and {.code longitude} columns.")
-  }
-
-  # Convert DMS to decimal format
-  transformed_data <- data %>%
-    dplyr::mutate(
-      latitude  = transform_dms_to_decimal(.data$latitude),
-      longitude = transform_dms_to_decimal(.data$longitude)
-    )
-
-  # Identify rows with invalid coordinates
-  invalid_rows <- which(
-    any(is.na(transformed_data$latitude) | is.na(transformed_data$longitude))
-  )
-
-  # Warn about invalid rows if any
-  if (0 < length(invalid_rows)) {
-    file_path <- attr(main_data, "file_path")
-    cli::cli_alert_warning(c(
-      "The file {.file file_path} contains invalid or missing coordinate data. ",
-      "The following rows are skipped: {toString(skipped_rows)}.}"
-    ))
-  }
-
-  # Exclude rows with invalid coordinates
-  result <- transformed_data %>%
-    tidyr::drop_na(latitude, longitude)
-
-  return(result)
-}
-
-create_datetime_field <- function(data) {
-  data %>%
-    dplyr::mutate(
-      occurrence_time = lubridate::make_datetime(
-        year  = as.integer(.data$occurrence_year),
-        month = as.integer(.data$occurrence_month),
-        day   = as.integer(.data$occurrence_day),
-        hour  = as.integer(.data$occurrence_hour),
-        min   = as.integer(.data$occurrence_min)
-      )
-    )
-}
-
+# Extract accident information
 extract_accident_info <- function(data) {
-  data %>%
+  extracted_data <- data %>%
     sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
     dplyr::select(dplyr::any_of(accident_info_columns)) %>%
     apply_code_labels()
+  dplyr::bind_rows(accident_info_frame, extracted_data)
 }
 
+# Extract person information
 extract_person_info <- function(data) {
   data %>%
     tidyr::pivot_longer(
@@ -270,12 +221,121 @@ extract_person_info <- function(data) {
     apply_code_labels()
 }
 
+# Apply code labels
 apply_code_labels <- function(data) {
   data %>%
     dplyr::mutate(dplyr::across(
       dplyr::any_of(names(code_label_map)),
       function(codes) code_label_map[[dplyr::cur_column()]]$labels[codes]
     ))
+}
+
+# Make accident data object
+make_accident_data <- function(accident_info = NULL,
+                               person_info   = NULL,
+                               highway_info  = NULL) {
+  list(
+    accident_info = dplyr::bind_rows(accident_info_frame, accident_info),
+    person_info   = dplyr::bind_rows(person_info_frame, person_info),
+    highway_info  = dplyr::bind_rows(highway_info_frame, highway_info)
+  )
+}
+
+
+# Field Transformations ---------------------------------------------------
+
+# Convert numeric fields
+convert_numeric_fields <- function(data) {
+  data %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(integer_fields), as.integer))
+}
+
+# Process datetime fields
+process_datetime_fields <- function(data) {
+  data %>%
+    dplyr::mutate(
+      occurrence_time = create_datetime(
+        .data,
+        "occurrence_year",
+        "occurrence_month",
+        "occurrence_day",
+        "occurrence_hour",
+        "occurrence_min"
+      ),
+      sunrise_time = create_datetime(
+        .data,
+        "occurrence_year",
+        "occurrence_month",
+        "occurrence_day",
+        "sunrise_hour",
+        "sunrise_min"
+      ),
+      sunset_time = create_datetime(
+        .data,
+        "occurrence_year",
+        "occurrence_month",
+        "occurrence_day",
+        "sunset_hour",
+        "sunset_min"
+      )
+    )
+}
+
+# Create datetime field
+create_datetime <- function(data, year, month, day, hour, min) {
+  required_cols <- c(year, month, day, hour, min)
+  if (!all(required_cols %in% colnames(data))) {
+    return(lubridate::as_datetime(NA))
+  }
+
+  data %>%
+    dplyr::mutate(dplyr::across(dplyr::all_of(required_cols), as.integer)) %>%
+    dplyr::mutate(
+      datetime_field = lubridate::make_datetime(
+        year  = .data[[year]],
+        month = .data[[month]],
+        day   = .data[[day]],
+        hour  = .data[[hour]],
+        min   = .data[[min]]
+      )
+    ) %>%
+    dplyr::pull(.data$datetime_field)
+}
+
+# Process coordinates
+process_coordinates <- function(data) {
+  # Validate required columns
+  required_cols <- c("latitude", "longitude")
+  if (!all(required_cols %in% colnames(data))) {
+    cli::cli_abort("Data must contain {.code latitude} and {.code longitude} columns.")
+  }
+
+  # Convert DMS to decimal format
+  transformed_data <- data %>%
+    dplyr::mutate(
+      latitude  = transform_dms_to_decimal(.data$latitude),
+      longitude = transform_dms_to_decimal(.data$longitude)
+    )
+
+  # Identify rows with invalid coordinates
+  invalid_rows <- which(
+    any(is.na(transformed_data$latitude) | is.na(transformed_data$longitude))
+  )
+
+  # Warn about invalid rows if any
+  if (0 < length(invalid_rows)) {
+    file_path <- attr(data, "file_path")
+    cli::cli_alert_warning(c(
+      "The file {.file file_path} contains invalid or missing coordinate data. ",
+      "The following rows are skipped: {toString(skipped_rows)}.}"
+    ))
+  }
+
+  # Exclude rows with invalid coordinates
+  result <- transformed_data %>%
+    tidyr::drop_na(.data$latitude, .data$longitude)
+
+  return(result)
 }
 
 
@@ -314,6 +374,7 @@ transform_dms_to_decimal <- function(dms) {
   return(decimal_degrees)
 }
 
+# Format DMS string
 format_dms_string <- function(dms) {
   # Convert to character and trim white space
   dms_str <- trimws(format(dms, scientific = FALSE))
@@ -330,6 +391,7 @@ format_dms_string <- function(dms) {
   return(dms_str)
 }
 
+# Extract DMS components
 extract_dms_components <- function(dms_str, start, end) {
   str_len <- nchar(dms_str)
   start <- ifelse(start < 0, str_len + start, start)
@@ -339,6 +401,7 @@ extract_dms_components <- function(dms_str, start, end) {
   return(dms_component)
 }
 
+# Calculate seconds from DMS string
 calculate_seconds <- function(dms_str) {
   seconds <- extract_dms_components(dms_str, -4, -3)
   milliseconds <- extract_dms_components(dms_str, -2, nchar(dms_str))
@@ -349,6 +412,7 @@ calculate_seconds <- function(dms_str) {
 
 # Data Merging ------------------------------------------------------------
 
+# Merge accident data
 merge_accident_data <- function(data_list) {
   merged_data <- data_list %>%
     purrr::transpose() %>%

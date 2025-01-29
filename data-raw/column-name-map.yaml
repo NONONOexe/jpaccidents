@@ -15,8 +15,8 @@ column_names:
   police_code:
     transformed: "police_code"
     original: "警察署等コード"
-  main_id:
-    transformed: "main_id"
+  report_number:
+    transformed: "report_number"
     original: "本票番号"
   injury_pattern:
     transformed: "injury_pattern"
@@ -227,7 +227,7 @@ column_names:
     original: "用途別"
   car_type:
     transformed: "car_type"
-    original: "車両形状等"
+    original: ["車両形状", "車両形状等"]
   boarding_type:
     transformed: "boarding_type"
     original: "乗車別"
@@ -258,6 +258,9 @@ column_names:
   highway_type:
     transformed: "highway_type"
     original: "道路区分"
+  road_structure:
+    transformed: "road_structure"
+    original: "道路構造"
   curve_radius:
     transformed: "curve_radius"
     original: "曲線半径"

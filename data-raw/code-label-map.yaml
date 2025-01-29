@@ -81,7 +81,63 @@ categories:
         en: "Train"
         ja: "列車"
 
-  impact_part:
+  primary_impact:
+    no_impact:
+      code: "0"
+      label: "no_impact"
+      display:
+        en: "No Impact"
+        ja: "衝突痕なし"
+    front:
+      code: "1"
+      label: "front"
+      display:
+        en: "Front"
+        ja: "前方"
+    right:
+      code: "2"
+      label: "right"
+      display:
+        en: "Right"
+        ja: "右方"
+    rear:
+      code: "3"
+      label: "rear"
+      display:
+        en: "Rear"
+        ja: "後方"
+    left:
+      code: "4"
+      label: "left"
+      display:
+        en: "Left"
+        ja: "左方"
+    front_right:
+      code: "5"
+      label: "front_right"
+      display:
+        en: "Front Right"
+        ja: "前方右"
+    rear_right:
+      code: "6"
+      label: "rear_right"
+      display:
+        en: "Rear Right"
+        ja: "後方右"
+    rear_left:
+      code: "7"
+      label: "rear_left"
+      display:
+        en: "Rear Left"
+        ja: "後方左"
+    front_left:
+      code: "8"
+      label: "front_left"
+      display:
+        en: "Front Left"
+        ja: "前方左"
+
+  secondary_impact:
     no_impact:
       code: "0"
       label: "no_impact"
