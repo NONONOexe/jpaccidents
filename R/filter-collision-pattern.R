@@ -39,10 +39,10 @@ filter_collision_pattern <- function(data,
 
   # Display filtering message
   cli::cli_alert_info(c(
-    "Filtering collision patterns...",
-    "Primary impacts: {.val {primary_impacts}}",
+    "Filtering by following condition(s): ",
+    "primary_impacts == {.val {primary_impacts}}",
     if (all(!is.na(secondary_impacts)))
-      ", Secondary impacts: {.val {secondary_impacts}}"
+      "and secondary_impacts == {.val {secondary_impacts}}"
   ))
 
   # Create condition table for filtering
@@ -86,11 +86,7 @@ filter_collision_pattern <- function(data,
 }
 
 validate_conditions <- function(primary_impacts, secondary_impacts) {
-  valid_values <- c(
-    "no_impact", "front", "right", "rear", "left",
-    "front_right", "rear_right", "rear_left", "front_left"
-  )
-
+  valid_values <- code_label_map$primary_impact$labels
   invalid_primary <- !(primary_impacts %in% valid_values)
   invalid_secondary <- !is.na(secondary_impacts) &
     !(secondary_impacts %in% valid_values)
