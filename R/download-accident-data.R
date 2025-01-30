@@ -43,26 +43,36 @@ download_accident_data <- function(type, download_dir = getwd(), years = 2023) {
   # Validate the input years
   if (any(years < 2019 | 2023 < years)) {
     invalid_years <- years[years < 2019 | 2023 < years]
-    cli::cli_abort("The `years` must be between 2019 and 2023. Invalid year(s) provided: {invalid_years}.")
+    cli::cli_abort("The {.code years} must be between 2019 and 2023. Invalid year(s): {invalid_years}.")
   }
 
+  # Base URL for downloading
+  base_url <- "https://www.npa.go.jp/publications/statistics/koutsuu/opendata"
+
   # Construct URLs for downloading
-  page <- "https://www.npa.go.jp/publications/statistics/koutsuu/opendata"
-  urls <- stringr::str_glue("{page}/{years}/{type_map[[type]]}_{years}.csv")
+  urls <- stringr::str_glue("{base_url}/{years}/{type_map[[type]]}_{years}.csv")
 
   # Log the download URLs
-  cli::cli_alert_info("Downloading files from the following URL:")
-  cli::cli_ul(urls)
+  cli::cli_inform(c(i = "Downloading files from the following URL(s): {.url {urls}}."))
 
   # Create destination file path
-  destination_files <- file.path(download_dir, basename(urls))
+  dest_files <- file.path(download_dir, basename(urls))
 
   # Download the files
-  curl::multi_download(urls, destination_files)
-  cli::cli_alert_success(c(
-    "Successfully downloaded {length(destination_files)} file(s) to ",
-    "{download_dir}"
-  ))
+  result <- curl::multi_download(urls, dest_files)
 
-  return(invisible(destination_files))
+  # Extract successful and failed downloads
+  success_files <- dest_files[result$status_code == 200]
+  failed_urls <- urls[result$status_code != 200]
+
+  # Log the results
+  if (0 < length(success_files)) {
+    cli::cli_inform(c("v" = "Successfully downloaded {length(success_files)} file(s) to {.path download_dir}."))
+  }
+
+  if (0 < length(failed_urls)) {
+    cli::cli_abort(c("x" = "Failed to download from URL(s): {.url {failed_urls}}."))
+  }
+
+  return(invisible(dest_files))
 }
