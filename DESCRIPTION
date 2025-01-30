@@ -1,6 +1,6 @@
 Package: jpaccidents
 Title: Tools for Traffic Accident Data in Japan
-Version: 0.2.3
+Version: 0.2.4
 Authors@R: 
     person("Keisuke", "Ando", , "ando@maslab.aitech.ac.jp", role = c("aut", "cre"))
 Description: In Japan, traffic accident data are published by the National
