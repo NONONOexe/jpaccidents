@@ -35,6 +35,20 @@ categories:
         en: "Highway Document"
         ja: "高速票"
 
+  accident_severity:
+    fatal:
+      code: "1"
+      label: "fatal"
+      display:
+        en: "Fatal"
+        ja: "死亡事故"
+    injury:
+      code: "2"
+      label: "injury"
+      display:
+        en: "Injury"
+        ja: "負傷事故"
+
   collision_position:
     single_road:
       code: "01"
@@ -55,7 +69,7 @@ categories:
         en: "Other"
         ja: "その他"
 
-  impact_type:
+  accident_type:
     vehicle_to_pedestrian:
       code: "01"
       label: "vehicle_to_pedestrian"

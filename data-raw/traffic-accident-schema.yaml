@@ -16,7 +16,7 @@ data_schema:
     prefecture_code: string
     police_code: string
     report_number: integer
-    injury_pattern: string
+    accident_severity: string
     fatality_number: integer
     injury_number: integer
     road_code: string
@@ -39,7 +39,7 @@ data_schema:
     zone_regulation: string
     center_divider: string
     road_verge: string
-    impact_type: string
+    accident_type: string
     day_of_week: string
     holiday: string
     geometry: geometry

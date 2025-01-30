@@ -18,8 +18,8 @@ column_names:
   report_number:
     transformed: "report_number"
     original: "本票番号"
-  injury_pattern:
-    transformed: "injury_pattern"
+  accident_severity:
+    transformed: "accident_severity"
     original: "事故内容"
   fatality_number:
     transformed: "fatality_number"
@@ -117,8 +117,8 @@ column_names:
   road_verge:
     transformed: "road_verge"
     original: "歩車道区分"
-  impact_type:
-    transformed: "impact_type"
+  accident_type:
+    transformed: "accident_type"
     original: "事故類型"
   age_a:
     transformed: "age_a"
