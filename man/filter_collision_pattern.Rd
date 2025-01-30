@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter-collision-pattern.R
 \name{filter_collision_pattern}
 \alias{filter_collision_pattern}
-\title{Filter collision patterns from accident data}
+\title{Filter accident data by collision patterns}
 \usage{
 filter_collision_pattern(
   data,
@@ -29,7 +29,7 @@ secondary impact conditions for each party involved in the accident.
 \details{
 The values of \code{primary_impacts} and \code{secondary_impacts} are following:
 \itemize{
-\item \code{"no_impact"}   : No impact
+\item \code{"no_impact"}  : No impact
 \item \code{"front"}      : Front of the vehicle
 \item \code{"right"}      : Right side of the vehicle
 \item \code{"rear"}       : Rear of the vehicle

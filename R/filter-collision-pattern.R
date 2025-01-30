@@ -1,10 +1,10 @@
-#' Filter collision patterns from accident data
+#' Filter accident data by collision patterns
 #'
 #' `filter_collision_pattern()` filters accident data based on primary and
 #' secondary impact conditions for each party involved in the accident.
 #'
 #' The values of `primary_impacts` and `secondary_impacts` are following:
-#'   * `"no_impact"`   : No impact
+#'   * `"no_impact"`  : No impact
 #'   * `"front"`      : Front of the vehicle
 #'   * `"right"`      : Right side of the vehicle
 #'   * `"rear"`       : Rear of the vehicle
