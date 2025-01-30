@@ -18,11 +18,26 @@
 #' read_accident_data(c("example/honhyo_2023.csv", "example/hojuhyo_2023.csv"))
 #' }
 read_accident_data <- function(file_paths) {
+  cli::cli_inform(c(
+    i = "Starting to read accident data...",
+    "Loading accident data from: {.file {file_paths}}."
+  ))
+  start_time <- Sys.time()
+
   accident_data <- file_paths %>%
     validate_file_paths() %>%            # Validate input file paths
     purrr::map(read_accident_file) %>%   # Read each accident file
     purrr::map(tidy_accident_data) %>%   # Tidy each accident dataset
     merge_accident_data()                # Merge data into single dataset
+
+  end_time <- Sys.time()
+  elapsed_time <- round(difftime(end_time, start_time, units = "secs"), 2)
+  cli::cli_inform(c(
+    "Successfully loaded ({elapsed_time} s)",
+    "Accident Info: {nrow(accident_data$accident_info)} records,",
+    "Party Info: {nrow(accident_data$person_info)} records, and",
+    "Highway Info: {nrow(accident_data$highway_info)} records."
+  ))
 
   return(accident_data)
 }
@@ -90,8 +105,8 @@ extract_years_from_paths <- function(file_paths) {
 
 # Notify about invalid files
 notify_invalid_files <- function(files, issue) {
-  cli::cli_alert_warning(
-    "Skipping file(s) due to invalid {issue}: {.file {files}}."
+  cli::cli_inform(
+    c("!" = "Skipping file(s) due to invalid {issue}: {.file {files}}.")
   )
 }
 
@@ -304,36 +319,37 @@ create_datetime <- function(data, year, month, day, hour, min) {
 
 # Process coordinates
 process_coordinates <- function(data) {
-  # Validate required columns
+  # Required columns
   required_cols <- c("latitude", "longitude")
+
+  # Validate presence of required columns
   if (!all(required_cols %in% colnames(data))) {
-    cli::cli_abort("Data must contain {.code latitude} and {.code longitude} columns.")
+    cli::cli_abort("Data must contain {.code {required_cols}} columns.")
   }
 
   # Convert DMS to decimal format
   transformed_data <- data %>%
     dplyr::mutate(
-      latitude  = transform_dms_to_decimal(.data$latitude),
-      longitude = transform_dms_to_decimal(.data$longitude)
+      latitude   = transform_dms_to_decimal(.data$latitude),
+      longitude  = transform_dms_to_decimal(.data$longitude),
+      is_invalid = is.na(.data$latitude) | is.na(.data$longitude) |
+                   .data$latitude < 20.42528 | 45.55722 < .data$latitude |
+                   .data$longitude < 122.9325 | 153.9867 < .data$longitude
     )
 
-  # Identify rows with invalid coordinates
-  invalid_rows <- which(
-    any(is.na(transformed_data$latitude) | is.na(transformed_data$longitude))
-  )
-
-  # Warn about invalid rows if any
-  if (0 < length(invalid_rows)) {
-    file_path <- attr(data, "file_path")
-    cli::cli_alert_warning(c(
-      "The file {.file file_path} contains invalid or missing coordinate data. ",
-      "The following rows are skipped: {toString(skipped_rows)}.}"
+  # Warn about invalid rows if any exist
+  invalid_count <- sum(transformed_data$is_invalid)
+  if (0 < invalid_count) {
+    file_path <- attr(data, "file_path", exact = TRUE)
+    cli::cli_inform(c(
+      "!" = "The file {.file {file_path}} contains {invalid_count} invalid/missing coordinate rows."
     ))
   }
 
-  # Exclude rows with invalid coordinates
+  # Exclude invalid rows
   result <- transformed_data %>%
-    tidyr::drop_na(.data$latitude, .data$longitude)
+    dplyr::filter(!.data$is_invalid) %>%
+    dplyr::select(-"is_invalid")
 
   return(result)
 }
@@ -359,12 +375,12 @@ transform_dms_to_decimal <- function(dms) {
   invalid_seconds <- !is.na(seconds) & (seconds < 0 | 60 <= seconds)
 
   if (any(invalid_minutes)) {
-    cli::cli_alert_warning("Minutes must be between 0 and 60.")
+    cli::cli_inform(c("!" = "Minutes must be between 0 and 60."))
     m[invalid_minutes] <- NA
   }
 
   if (any(invalid_seconds)) {
-    cli::cli_alert_warning("Seconds must be between 0 and 60.")
+    cli::cli_inform(c("!" = "Seconds must be between 0 and 60."))
     s[invalid_seconds] <- NA
   }
 
@@ -382,8 +398,8 @@ format_dms_string <- function(dms) {
   # Validate input format
   valid_format <- grepl("^[0-9]{8,10}$", dms_str)
   if (!all(valid_format)) {
-    cli::cli_alert_warning(
-      "The input must be a number consisting of 8 to 10 digits."
+    cli::cli_inform(
+      c("!" = "The input must be a number consisting of 8 to 10 digits.")
     )
     dms_str[!valid_format] <- NA
   }
