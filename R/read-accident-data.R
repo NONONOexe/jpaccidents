@@ -249,10 +249,13 @@ apply_code_labels <- function(data) {
 make_accident_data <- function(accident_info = NULL,
                                person_info   = NULL,
                                highway_info  = NULL) {
-  list(
-    accident_info = dplyr::bind_rows(accident_info_frame, accident_info),
-    person_info   = dplyr::bind_rows(person_info_frame, person_info),
-    highway_info  = dplyr::bind_rows(highway_info_frame, highway_info)
+  structure(
+    list(
+      accident_info = dplyr::bind_rows(accident_info_frame, accident_info),
+      person_info   = dplyr::bind_rows(person_info_frame, person_info),
+      highway_info  = dplyr::bind_rows(highway_info_frame, highway_info)
+    ),
+    class = "accident_data"
   )
 }
 
@@ -423,16 +426,4 @@ calculate_seconds <- function(dms_str) {
   milliseconds <- extract_dms_components(dms_str, -2, nchar(dms_str))
 
   return(seconds + milliseconds / 1000)
-}
-
-
-# Data Merging ------------------------------------------------------------
-
-# Merge accident data
-merge_accident_data <- function(data_list) {
-  merged_data <- data_list %>%
-    purrr::transpose() %>%
-    purrr::map(dplyr::bind_rows)
-
-  return(merged_data)
 }

@@ -9,7 +9,7 @@ filter_accident_type(data, accident_type)
 \arguments{
 \item{data}{A list containing accident data.}
 
-\item{accident_type}{A character string specifying the accident type to
+\item{accident_type}{A vector of specifying the accident type to
 filter. Must be one of the following values:
 \itemize{
 \item \code{"vehicle_to_pedestrian"}: Vehicle-to-pedestrian collision

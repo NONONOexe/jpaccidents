@@ -19,14 +19,29 @@ traffic_accident_schema <-
   yaml::read_yaml(here::here("data-raw", "traffic-accident-schema.yaml")) %>%
   purrr::pluck("data_schema")
 
+# Extract primary key columns for accident data
+key_columns <- traffic_accident_schema$accident_info$primary_key
+
+# Extract integer fields
+integer_fields <- traffic_accident_schema %>%
+  purrr::map(\(data_schema) {
+    data_schema %>%
+      purrr::pluck("columns") %>%
+      purrr::keep(\(column_type) column_type == "integer") %>%
+      names()
+  }) %>%
+  purrr::reduce(c)
+
+# Extract empty data frames based on the schema
 data_frames <- traffic_accident_schema %>%
-  purrr::map(\(column_types) {
+  purrr::map(\(data_schema) {
     # Define data types for each column
-    data_schema <- column_types %>%
+    data_frame <- data_schema %>%
+      purrr::pluck("columns") %>%
       purrr::map(
-        \(column_type)
+        \(column)
         switch (
-          column_type,
+          column,
           string   = character(),
           integer  = integer(),
           datetime = as.POSIXct(character()),
@@ -37,19 +52,8 @@ data_frames <- traffic_accident_schema %>%
       tibble::as_tibble()
 
     # Convert to sf object if geometry data is include
-    if ("geometry" %in% column_types) sf::st_sf(data_schema) else data_schema
+    if ("geometry" %in% data_schema) sf::st_sf(data_frame) else data_frame
   })
-
-# Extract integer fields
-integer_fields <- traffic_accident_schema %>%
-  purrr::map(\(column_types) {
-    column_types %>%
-      purrr::keep(\(column_type) column_type == "integer") %>%
-      names()
-  }) %>%
-  purrr::reduce(c)
-
-# Extract empty data frames based on the schema
 accident_info_frame <- data_frames$accident_info
 person_info_frame <- data_frames$person_info
 highway_info_frame <- data_frames$highway_info
@@ -82,6 +86,7 @@ code_label_map <-
 # Save the processed data internally within the jpaccidents package
 usethis::use_data(
   column_name_map,
+  key_columns,
   integer_fields,
   accident_info_frame,
   person_info_frame,

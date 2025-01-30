@@ -46,19 +46,11 @@ filter_collision_pattern <- function(data,
   ))
 
   # Create condition table for filtering
-  person_conditions <- create_condition_table(
-    primary_impacts, secondary_impacts
-  )
-
-  # Define key columns for accident records
-  key_columns <- c(
-    "document_type", "report_year", "prefecture_code",
-    "police_code", "report_number"
-  )
+  conditions <- create_condition_table(primary_impacts, secondary_impacts)
 
   # Filter party information based on the impact conditions
-  filtered_key <- data$person_info %>%
-    dplyr::inner_join(person_conditions, by = "party_order") %>%
+  filter_keys <- data$person_info %>%
+    dplyr::inner_join(conditions, by = "party_order") %>%
     dplyr::filter(
       .data$primary_impact == .data$primary_impact_condition,
       dplyr::coalesce(
@@ -66,23 +58,12 @@ filter_collision_pattern <- function(data,
         TRUE
       )
     ) %>%
-    dplyr::filter(
-      dplyr::n() == nrow(person_conditions),
-      .by = key_columns
-    ) %>%
+    dplyr::filter(dplyr::n() == nrow(conditions), .by = key_columns) %>%
     dplyr::select(dplyr::all_of(key_columns)) %>%
     dplyr::distinct()
 
-  # Display matched record count
-  matched_num <- nrow(filtered_key)
-  cli::cli_alert_info(
-    if (matched_num == 0) "No matched records found."
-    else "Matched records: {matched_num}"
-  )
-
   # Filter datasets based on the matching keys
-  data %>%
-    purrr::map(dplyr::semi_join, filtered_key, by = key_columns)
+  filter_accident_data(data, filter_keys)
 }
 
 validate_conditions <- function(primary_impacts, secondary_impacts) {
@@ -92,10 +73,7 @@ validate_conditions <- function(primary_impacts, secondary_impacts) {
     !(secondary_impacts %in% valid_values)
 
   if (any(invalid_primary) || any(invalid_secondary)) {
-    cli::cli_abort(paste0(
-      "{.code primary_impacts} and {.code secondary_impacts} must be",
-      "one of the following values: {.val {valid_values}}."
-    ))
+    cli::cli_abort("{.code primary_impacts} and {.code secondary_impacts} must be one of the following values: {.val {valid_values}}.")
   }
 }
 
