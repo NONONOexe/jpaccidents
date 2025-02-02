@@ -9,8 +9,8 @@ column_names:
   document_type:
     transformed: "document_type"
     original: "資料区分"
-  prefecture_code:
-    transformed: "prefecture_code"
+  prefecture:
+    transformed: "prefecture"
     original: "都道府県コード"
   police_code:
     transformed: "police_code"

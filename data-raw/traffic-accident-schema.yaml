@@ -14,13 +14,13 @@ data_schema:
     primary_key:
       - document_type
       - report_year
-      - prefecture_code
+      - prefecture
       - police_code
       - report_number
     columns:
       document_type: string
       report_year: integer
-      prefecture_code: string
+      prefecture: string
       police_code: string
       report_number: integer
       accident_severity: string
@@ -55,14 +55,14 @@ data_schema:
     primary_key:
       - document_type
       - report_year
-      - prefecture_code
+      - prefecture
       - police_code
       - report_number
       - party_rank
     columns:
       document_type: string
       report_year: integer
-      prefecture_code: string
+      prefecture: string
       police_code: string
       report_number: integer
       party_order: integer
@@ -88,13 +88,13 @@ data_schema:
     primary_key:
       - document_type
       - report_year
-      - prefecture_code
+      - prefecture
       - police_code
       - report_number
     columns:
       document_type: string
       report_year: integer
-      prefecture_code: string
+      prefecture: string
       police_code: string
       report_number: integer
       road_manager: string

@@ -35,6 +35,314 @@ categories:
         en: "Highway Document"
         ja: "高速票"
 
+  prefecture:
+    hokkaido_sapporo:
+      code: "10"
+      label: "hokkaido_sapporo"
+      display:
+        en: "Hokkaido Sapporo"
+        ja: "北海道（札幌方面）"
+    hokkaido_hakodate:
+      code: "11"
+      label: "hokkaido_hakodate"
+      display:
+        en: "Hokkaido Hakodate"
+        ja: "北海道（函館方面）"
+    hokkaido_asahikawa:
+      code: "12"
+      label: "hokkaido_asahikawa"
+      display:
+        en: "Hokkaido Asahikawa"
+        ja: "北海道（旭川方面）"
+    hokkaido_kushiro:
+      code: "13"
+      label: "hokkaido_kushiro"
+      display:
+        en: "Hokkaido Kushiro"
+        ja: "北海道（釧路方面）"
+    hokkaido_kitami:
+      code: "14"
+      label: "hokkaido_kitami"
+      display:
+        en: "Hokkaido Kitami"
+        ja: "北海道（北見方面）"
+    aomori:
+      code: "20"
+      label: "aomori"
+      display:
+        en: "Aomori"
+        ja: "青森"
+    iwate:
+      code: "21"
+      label: "iwate"
+      display:
+        en: "Iwate"
+        ja: "岩手"
+    miyagi:
+      code: "22"
+      label: "miyagi"
+      display:
+        en: "Miyagi"
+        ja: "宮城"
+    akita:
+      code: "23"
+      label: "akita"
+      display:
+        en: "Akita"
+        ja: "秋田"
+    yamagata:
+      code: "24"
+      label: "yamagata"
+      display:
+        en: "Yamagata"
+        ja: "山形"
+    fukushima:
+      code: "25"
+      label: "fukushima"
+      display:
+        en: "Fukushima"
+        ja: "福島"
+    tokyo:
+      code: "30"
+      label: "tokyo"
+      display:
+        en: "Tokyo"
+        ja: "東京"
+    ibaraki:
+      code: "40"
+      label: "ibaraki"
+      display:
+        en: "Ibaraki"
+        ja: "茨城"
+    tochigi:
+      code: "41"
+      label: "tochigi"
+      display:
+        en: "Tochigi"
+        ja: "栃木"
+    gunma:
+      code: "42"
+      label: "gunma"
+      display:
+        en: "Gunma"
+        ja: "群馬"
+    saitama:
+      code: "43"
+      label: "saitama"
+      display:
+        en: "Saitama"
+        ja: "埼玉"
+    chiba:
+      code: "44"
+      label: "chiba"
+      display:
+        en: "Chiba"
+        ja: "千葉"
+    kanagawa:
+      code: "45"
+      label: "kanagawa"
+      display:
+        en: "Kanagawa"
+        ja: "神奈川"
+    niigata:
+      code: "46"
+      label: "niigata"
+      display:
+        en: "Niigata"
+        ja: "新潟"
+    yamanashi:
+      code: "47"
+      label: "yamanashi"
+      display:
+        en: "Yamanashi"
+        ja: "山梨"
+    nagano:
+      code: "48"
+      label: "nagano"
+      display:
+        en: "Nagano"
+        ja: "長野"
+    shizuoka:
+      code: "49"
+      label: "shizuoka"
+      display:
+        en: "Shizuoka"
+        ja: "静岡"
+    toyama:
+      code: "50"
+      label: "toyama"
+      display:
+        en: "Toyama"
+        ja: "富山"
+    ishikawa:
+      code: "51"
+      label: "ishikawa"
+      display:
+        en: "Ishikawa"
+        ja: "石川"
+    fukui:
+      code: "52"
+      label: "fukui"
+      display:
+        en: "Fukui"
+        ja: "福井"
+    gifu:
+      code: "53"
+      label: "gifu"
+      display:
+        en: "Gifu"
+        ja: "岐阜"
+    aichi:
+      code: "54"
+      label: "aichi"
+      display:
+        en: "Aichi"
+        ja: "愛知"
+    mie:
+      code: "55"
+      label: "mie"
+      display:
+        en: "Mie"
+        ja: "三重"
+    shiga:
+      code: "60"
+      label: "shiga"
+      display:
+        en: "Shiga"
+        ja: "滋賀"
+    kyoto:
+      code: "61"
+      label: "kyoto"
+      display:
+        en: "Kyoto"
+        ja: "京都"
+    osaka:
+      code: "62"
+      label: "osaka"
+      display:
+        en: "Osaka"
+        ja: "大阪"
+    hyogo:
+      code: "63"
+      label: "hyogo"
+      display:
+        en: "Hyogo"
+        ja: "兵庫"
+    nara:
+      code: "64"
+      label: "nara"
+      display:
+        en: "Nara"
+        ja: "奈良"
+    wakayama:
+      code: "65"
+      label: "wakayama"
+      display:
+        en: "Wakayama"
+        ja: "和歌山"
+    tottori:
+      code: "70"
+      label: "tottori"
+      display:
+        en: "Tottori"
+        ja: "鳥取"
+    shimane:
+      code: "71"
+      label: "shimane"
+      display:
+        en: "Shimane"
+        ja: "島根"
+    okayama:
+      code: "72"
+      label: "okayama"
+      display:
+        en: "Okayama"
+        ja: "岡山"
+    hiroshima:
+      code: "73"
+      label: "hiroshima"
+      display:
+        en: "Hiroshima"
+        ja: "広島"
+    yamaguchi:
+      code: "74"
+      label: "yamaguchi"
+      display:
+        en: "Yamaguchi"
+        ja: "山口"
+    tokushima:
+      code: "80"
+      label: "tokushima"
+      display:
+        en: "Tokushima"
+        ja: "徳島"
+    kagawa:
+      code: "81"
+      label: "kagawa"
+      display:
+        en: "Kagawa"
+        ja: "香川"
+    ehime:
+      code: "82"
+      label: "ehime"
+      display:
+        en: "Ehime"
+        ja: "愛媛"
+    kochi:
+      code: "83"
+      label: "kochi"
+      display:
+        en: "Kochi"
+        ja: "高知"
+    fukuoka:
+      code: "90"
+      label: "fukuoka"
+      display:
+        en: "Fukuoka"
+        ja: "福岡"
+    saga:
+      code: "91"
+      label: "saga"
+      display:
+        en: "Saga"
+        ja: "佐賀"
+    nagasaki:
+      code: "92"
+      label: "nagasaki"
+      display:
+        en: "Nagasaki"
+        ja: "長崎"
+    kumamoto:
+      code: "93"
+      label: "kumamoto"
+      display:
+        en: "Kumamoto"
+        ja: "熊本"
+    oita:
+      code: "94"
+      label: "oita"
+      display:
+        en: "Oita"
+        ja: "大分"
+    miyazaki:
+      code: "95"
+      label: "miyazaki"
+      display:
+        en: "Miyazaki"
+        ja: "宮崎"
+    kagoshima:
+      code: "96"
+      label: "kagoshima"
+      display:
+        en: "Kagoshima"
+        ja: "鹿児島"
+    okinawa:
+      code: "97"
+      label: "okinawa"
+      display:
+        en: "Okinawa"
+        ja: "沖縄"
+
   accident_severity:
     fatal:
       code: "1"
