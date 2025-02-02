@@ -42,7 +42,7 @@ filter_accident_type <- function(data, accident_type) {
     sf::st_drop_geometry()
 
   # Filter datasets based on the matching keys
-  filter_accident_data(filter_keys)
+  filter_accident_data(data, filter_keys)
 }
 
 validate_accident_type <- function(accident_type) {

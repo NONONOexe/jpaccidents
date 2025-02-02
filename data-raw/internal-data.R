@@ -50,11 +50,8 @@ data_frames <- traffic_accident_schema %>%
         )
       ) %>%
       tibble::as_tibble()
-
-    # Convert to sf object if geometry data is include
-    if ("geometry" %in% data_schema) sf::st_sf(data_frame) else data_frame
   })
-accident_info_frame <- data_frames$accident_info
+accident_info_frame <- sf::st_sf(data_frames$accident_info)
 person_info_frame <- data_frames$person_info
 highway_info_frame <- data_frames$highway_info
 

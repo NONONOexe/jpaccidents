@@ -208,11 +208,10 @@ process_highway_data <- function(highway_data) {
 
 # Extract accident information
 extract_accident_info <- function(data) {
-  extracted_data <- data %>%
+  data %>%
     sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
     dplyr::select(dplyr::any_of(accident_info_columns)) %>%
     apply_code_labels()
-  dplyr::bind_rows(accident_info_frame, extracted_data)
 }
 
 # Extract person information
@@ -240,8 +239,11 @@ extract_person_info <- function(data) {
 apply_code_labels <- function(data) {
   data %>%
     dplyr::mutate(dplyr::across(
+      # Select columns that exist in the code label map
       dplyr::any_of(names(code_label_map)),
-      function(codes) code_label_map[[dplyr::cur_column()]]$labels[codes]
+
+      # Replace categorical codes with their corresponding labels
+      ~ unname(code_label_map[[dplyr::cur_column()]]$labels[.x])
     ))
 }
 

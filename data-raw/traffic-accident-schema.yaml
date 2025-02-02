@@ -15,7 +15,7 @@ data_schema:
       - document_type
       - report_year
       - prefecture_code
-      - police_number
+      - police_code
       - report_number
     columns:
       document_type: string
@@ -56,9 +56,9 @@ data_schema:
       - document_type
       - report_year
       - prefecture_code
-      - police_number
+      - police_code
       - report_number
-      - party_sign
+      - party_rank
     columns:
       document_type: string
       report_year: integer
@@ -89,7 +89,7 @@ data_schema:
       - document_type
       - report_year
       - prefecture_code
-      - police_number
+      - police_code
       - report_number
     columns:
       document_type: string

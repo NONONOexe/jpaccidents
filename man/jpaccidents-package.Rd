@@ -18,7 +18,15 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Keisuke Ando \email{ando@maslab.aitech.ac.jp}
+\strong{Maintainer}: Keisuke Ando \email{ando@maslab.aitech.ac.jp} (\href{https://orcid.org/0009-0002-4085-2067}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Takeshi Uchitane [thesis advisor]
+  \item Naoto Mukai [thesis advisor]
+  \item Kazunori Iwata [thesis advisor]
+  \item Nobuhiro Ito [thesis advisor]
+}
 
 }
 \keyword{internal}
