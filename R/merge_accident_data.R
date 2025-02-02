@@ -17,6 +17,7 @@ merge_accident_data.accident_data <- function(...) {
 }
 
 #' @rdname merge_accident_data
+#' @param data_list A list of `accident_data` objects to merge.
 #' @export
 merge_accident_data.list <- function(data_list, ...) {
   data_list %>%

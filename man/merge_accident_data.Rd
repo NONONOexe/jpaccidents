@@ -14,6 +14,8 @@ merge_accident_data(...)
 }
 \arguments{
 \item{...}{\code{accident_data} objects to merge.}
+
+\item{data_list}{A list of \code{accident_data} objects to merge.}
 }
 \value{
 A merged \code{accident_data} object.
