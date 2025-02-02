@@ -1,8 +1,14 @@
 Package: jpaccidents
 Title: Tools for Traffic Accident Data in Japan
 Version: 0.2.4
-Authors@R: 
-    person("Keisuke", "Ando", , "ando@maslab.aitech.ac.jp", role = c("aut", "cre"))
+Authors@R: c(
+    person("Keisuke", "Ando", , "ando@maslab.aitech.ac.jp", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0002-4085-2067")),
+    person("Takeshi", "Uchitane", role = "ths"),
+    person("Naoto", "Mukai", role = "ths"),
+    person("Kazunori", "Iwata", role = "ths"),
+    person("Nobuhiro", "Ito", role = "ths")
+  )
 Description: In Japan, traffic accident data are published by the National
     Police Agency. This package provides tools to efficiently handle and
     standardise these datasets, facilitating seamless analysis and

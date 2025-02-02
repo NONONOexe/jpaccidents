@@ -1,0 +1,13 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "jpaccidents: Tools for Traffic Accident Data in Japan",
+  author   = c(person("Keisuke", "Ando", , "ando@maslab.aitech.ac.jp",
+                      role = c("aut", "cre"),
+                      comment = c(ORCID = "0009-0002-4085-2067")),
+               person("Takeshi", "Uchitane", role = "ths"),
+               person("Naoto", "Mukai", role = "ths"),
+               person("Kazunori", "Iwata", role = "ths"),
+               person("Nobuhiro", "Ito", role = "ths")),
+  year     = 2025,
+  url      = "https://nononoexe.github.io/jpaccidents/"
+)
