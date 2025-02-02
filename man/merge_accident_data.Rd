@@ -22,4 +22,3 @@ A merged \code{accident_data} object.
 \code{merge_accident_data()} merges multiple \code{accident_data} objects into a
 single \code{accident_data} object.
 }
-\keyword{internal}

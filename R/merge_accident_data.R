@@ -17,7 +17,7 @@ merge_accident_data.accident_data <- function(...) {
 }
 
 #' @rdname merge_accident_data
-#' @keywords internal
+#' @export
 merge_accident_data.list <- function(data_list, ...) {
   data_list %>%
     purrr::transpose() %>%
