@@ -5,6 +5,7 @@
 #'
 #' @param ... `accident_data` objects to merge.
 #' @return A merged `accident_data` object.
+#' @export
 merge_accident_data <- function(...) {
   UseMethod("merge_accident_data")
 }
