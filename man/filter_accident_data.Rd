@@ -57,6 +57,6 @@ vehicle_to_pedestrian_collisions <- data \%>\%
 
 # Extract accidents that occured on curved roads
 curved_road_accidents <- data \%>\%
-  filter_road_shape("curved")
+  filter_road_shape("curve")
 }
 }

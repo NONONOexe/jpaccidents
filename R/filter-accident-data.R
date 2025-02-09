@@ -37,7 +37,7 @@
 #'
 #' # Extract accidents that occured on curved roads
 #' curved_road_accidents <- data %>%
-#'   filter_road_shape("curved")
+#'   filter_road_shape("curve")
 #' }
 NULL
 
@@ -50,7 +50,7 @@ filter_accident_type <- function(data, accident_type) {
 #' @rdname filter_accident_data
 #' @export
 filter_road_shape <- function(data, road_shape) {
-  filter_by_category(data, road_shape, "curve")
+  filter_by_category(data, road_shape, "road_shape")
 }
 
 #' Filter accident data by category
