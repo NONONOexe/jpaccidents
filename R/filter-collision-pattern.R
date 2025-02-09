@@ -63,7 +63,7 @@ filter_collision_pattern <- function(data,
     dplyr::distinct()
 
   # Filter datasets based on the matching keys
-  filter_accident_data(data, filter_keys)
+  filter_by_key(data, filter_keys)
 }
 
 validate_conditions <- function(primary_impacts, secondary_impacts) {
