@@ -357,6 +357,80 @@ categories:
         en: "Injury"
         ja: "負傷事故"
 
+  road_shape:
+    intersection_roundabout:
+      code: "31"
+      label: "intersection_roundabout"
+      display:
+        en: "Roundabout"
+        ja: "環状交差点"
+    intersection_other:
+      code: "01"
+      label: "intersection"
+      display:
+        en: "Intersection"
+        ja: "交差点"
+    near_intersection_roundabout:
+      code: "37"
+      label: "near_intersection_roundabout"
+      display:
+        en: "Near Roundabout"
+        ja: "環状交差点付近"
+    near_intersection_other:
+      code: "07"
+      label: "near_intersection_other"
+      display:
+        en: "Near Intersection"
+        ja: "交差点付近"
+    tunnel:
+      code: "11"
+      label: "tunnel"
+      display:
+        en: "Tunnel"
+        ja: "トンネル"
+    bridge:
+      code: "12"
+      label: "bridge"
+      display:
+        en: "Bridge"
+        ja: "橋"
+    curve:
+      code: "13"
+      label: "curve"
+      display:
+        en: "Curve or Bend"
+        ja: "カーブ・屈折"
+    single_road:
+      code: "14"
+      label: "single_road"
+      display:
+        en: "Single Road"
+        ja: "単路"
+    railroad_crossing_type1:
+      code: "21"
+      label: "railroad_crossing_type1"
+      display:
+        en: "Railroad Crossing (Type 1)"
+        ja: "踏切（第一種）"
+    railroad_crossing_type3:
+      code: "22"
+      label: "railroad_crossing_type3"
+      display:
+        en: "Railroad Crossing (Type 3)"
+        ja: "踏切（第三種）"
+    railroad_crossing_type4:
+      code: "23"
+      label: "railroad_crossing_type4"
+      display:
+        en: "Railroad Crossing（Type 4）"
+        ja: "踏切（第四種）"
+    general_traffic_area:
+      code: "00"
+      label: "general_traffic_area"
+      display:
+        en: "General Traffic Area"
+        ja: "一般交通の場所"
+
   collision_position:
     single_road:
       code: "01"
