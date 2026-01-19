@@ -1,0 +1,72 @@
+# jpaccidents
+
+jpaccidents is package for handling the traffic accident data in Japan.
+This package covers the traffic accident data provided by the [National
+Police Agency of Japan](https://www.npa.go.jp/english/index.html).
+
+> jpaccidentsは日本の交通事故のデータを扱うためのパッケージです。
+> このパッケージでは、[警察庁](https://www.npa.go.jp/index.html)が提供する交通事故データを対象としています。
+
+## Installation
+
+You can install the development version of jpaccidents like so:
+
+> jpaccidentsの開発版は以下のコマンドからインストールできます。
+
+``` r
+install.packages("remotes")
+remotes::install_git("https://github.com/NONONOexe/jpaccidents")
+```
+
+## Usage
+
+Load the package as follows:
+
+> パッケージを以下のようにして読み込みます。
+
+``` r
+library(jpaccidents)
+```
+
+The traffic accident data can be used follows:
+
+> 交通事故のデータは次のようにして利用することができます。
+
+``` r
+downloaded_path <- download_accident_main_data(download_dir = "download-dir-path", year = 2022)
+main_data <- read_accident_main_data(downloaded_path)
+```
+
+There are three types of traffic accident data: main (honhyo),
+supplementary (hojyuhyo), and highway (kosokuhyo) data. The package
+provides functions for each of these. Use the function appropriate for
+the data you need. See also `? download_accident_main_data` for more
+information.
+
+> 交通事故のデータは本票、補充票、高速票の3種類があります。
+> それぞれに対応する関数が用意されています。
+> 必要なデータに応じて利用してください。
+> 詳しくは`? download_accident_main_data`を参照してください。
+
+## License
+
+This package is licensed under the MIT License - see the
+[LICENSE](https://nononoexe.github.io/jpaccidents/LICENSE) file for
+details. The traffic accident data downloaded using this package is
+provided by the National Police Agency of Japan under the [Creative
+Commons Attribution 4.0 International
+License](https://creativecommons.org/licenses/by/4.0/).
+
+> このパッケージはMITライセンスの下で提供されています。詳細は[LICENSE](https://nononoexe.github.io/jpaccidents/LICENSE)ファイルを参照してください。
+> また、本パッケージによりダウンロードできる交通事故データは、警察庁により[クリエイティブ・コモンズ
+> 表示 4.0 国際
+> ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)の下で提供されています。
+
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of
+Conduct](https://nononoexe.github.io/jpaccidents/CODE_OF_CONDUCT.md). By
+participating in this project you agree to abide by its terms.
+
+> このプロジェクトは[行動規範](https://nononoexe.github.io/jpaccidents/CODE_OF_CONDUCT.md)を設けています。
+> したがって、このプロジェクトでは参加者にこの行動規範に従うことを求めます。
