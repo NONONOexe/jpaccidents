@@ -275,7 +275,7 @@ process_datetime_fields <- function(data) {
   data %>%
     dplyr::mutate(
       occurrence_time = create_datetime(
-        .data,
+        data,
         "occurrence_year",
         "occurrence_month",
         "occurrence_day",
@@ -283,7 +283,7 @@ process_datetime_fields <- function(data) {
         "occurrence_min"
       ),
       sunrise_time = create_datetime(
-        .data,
+        data,
         "occurrence_year",
         "occurrence_month",
         "occurrence_day",
@@ -291,7 +291,7 @@ process_datetime_fields <- function(data) {
         "sunrise_min"
       ),
       sunset_time = create_datetime(
-        .data,
+        data,
         "occurrence_year",
         "occurrence_month",
         "occurrence_day",
@@ -304,6 +304,7 @@ process_datetime_fields <- function(data) {
 # Create datetime field
 create_datetime <- function(data, year, month, day, hour, min) {
   required_cols <- c(year, month, day, hour, min)
+
   if (!all(required_cols %in% colnames(data))) {
     return(lubridate::as_datetime(NA))
   }
