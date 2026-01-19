@@ -67,7 +67,7 @@ download_accident_data <- function(type, download_dir = getwd(), years = 2023) {
 
   # Log the results
   if (0 < length(success_files)) {
-    cli::cli_inform(c("v" = "Successfully downloaded {length(success_files)} file(s) to {.path download_dir}."))
+    cli::cli_inform(c("v" = "Successfully downloaded {length(success_files)} file(s) to {.path {download_dir}}."))
   }
 
   if (0 < length(failed_urls)) {

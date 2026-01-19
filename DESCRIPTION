@@ -1,6 +1,6 @@
 Package: jpaccidents
 Title: Tools for Traffic Accident Data in Japan
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: c(
     person("Keisuke", "Ando", , "ando@maslab.aitech.ac.jp", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-4085-2067")),
@@ -40,4 +40,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
