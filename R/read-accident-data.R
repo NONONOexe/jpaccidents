@@ -317,7 +317,8 @@ create_datetime <- function(data, year, month, day, hour, min) {
         month = .data[[month]],
         day   = .data[[day]],
         hour  = .data[[hour]],
-        min   = .data[[min]]
+        min   = .data[[min]],
+        tz    = "Asia/Tokyo"
       )
     ) %>%
     dplyr::pull(.data$datetime_field)
