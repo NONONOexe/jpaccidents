@@ -67,56 +67,61 @@
 <!-- badges: start -->
 
 <p>jpaccidents is package for handling the traffic accident data in Japan. This package covers the traffic accident data provided by the <a href="https://www.npa.go.jp/english/index.html" class="external-link">National Police Agency of Japan</a>.</p>
-<blockquote>
 <p>jpaccidentsは日本の交通事故のデータを扱うためのパッケージです。 このパッケージでは、<a href="https://www.npa.go.jp/index.html" class="external-link">警察庁</a>が提供する交通事故データを対象としています。</p>
-</blockquote>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of jpaccidents like so:</p>
-<blockquote>
-<p>jpaccidentsの開発版は以下のコマンドからインストールできます。</p>
-</blockquote>
+<p>You can install the development version of jpaccidents using the following methods:</p>
+<p>jpaccidentsの開発版は以下の方法からインストールできます。</p>
+<div class="section level3">
+<h3 id="using-installpackages-r-universe">Using <code>install.packages()</code> (R-universe)<a class="anchor" aria-label="anchor" href="#using-installpackages-r-universe"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_git</span><span class="op">(</span><span class="st">"https://github.com/NONONOexe/jpaccidents"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Enable the R-universe</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  nononoexe <span class="op">=</span> <span class="st">"https://nonoexe.r-universe.dev"</span>,</span>
+<span>  cran <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="using-pak">Using <code>pak</code>
+<a class="anchor" aria-label="anchor" href="#using-pak"></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"NONONOexe/jpaccidents"</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>Load the package as follows:</p>
-<blockquote>
 <p>パッケージを以下のようにして読み込みます。</p>
-</blockquote>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nononoexe.github.io/jpaccidents/">jpaccidents</a></span><span class="op">)</span></span></code></pre></div>
 <p>The traffic accident data can be used follows:</p>
-<blockquote>
 <p>交通事故のデータは次のようにして利用することができます。</p>
-</blockquote>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">downloaded_path</span> <span class="op">&lt;-</span> <span class="fu">download_accident_main_data</span><span class="op">(</span>download_dir <span class="op">=</span> <span class="st">"download-dir-path"</span>, year <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span></span>
-<span><span class="va">main_data</span> <span class="op">&lt;-</span> <span class="fu">read_accident_main_data</span><span class="op">(</span><span class="va">downloaded_path</span><span class="op">)</span></span></code></pre></div>
-<p>There are three types of traffic accident data: main (honhyo), supplementary (hojyuhyo), and highway (kosokuhyo) data. The package provides functions for each of these. Use the function appropriate for the data you need. See also <code>? download_accident_main_data</code> for more information.</p>
-<blockquote>
-<p>交通事故のデータは本票、補充票、高速票の3種類があります。 それぞれに対応する関数が用意されています。 必要なデータに応じて利用してください。 詳しくは<code>? download_accident_main_data</code>を参照してください。</p>
-</blockquote>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">downloaded_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_accident_data.html">download_accident_data</a></span><span class="op">(</span></span>
+<span>  type         <span class="op">=</span> <span class="st">"main"</span>,</span>
+<span>  download_dir <span class="op">=</span> <span class="st">"download-dir-path"</span>,</span>
+<span>  years        <span class="op">=</span> <span class="fl">2023</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">accident_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_accident_data.html">read_accident_data</a></span><span class="op">(</span><span class="va">downloaded_path</span><span class="op">)</span></span></code></pre></div>
+<p>There are three types of traffic accident data: main (honhyo), supplementary (hojyuhyo), and highway (kosokuhyo) data. jpaccidents provides functions to download specified types of data. It also provides functions for importing each data set into into a common schema.</p>
+<p>交通事故のデータは本票、補充票、高速票の3種類があります。 jpaccidentsはこれらのデータから指定したものをダウンロードする関数を提供します。 また、各データを共通スキーマに取り込むための関数を提供します。</p>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
 <p>This package is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details. The traffic accident data downloaded using this package is provided by the National Police Agency of Japan under the <a href="https://creativecommons.org/licenses/by/4.0/" class="external-link">Creative Commons Attribution 4.0 International License</a>.</p>
-<blockquote>
 <p>このパッケージはMITライセンスの下で提供されています。詳細は<a href="LICENSE">LICENSE</a>ファイルを参照してください。 また、本パッケージによりダウンロードできる交通事故データは、警察庁により<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" class="external-link">クリエイティブ・コモンズ 表示 4.0 国際 ライセンス</a>の下で提供されています。</p>
-</blockquote>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
 <p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
-<blockquote>
 <p>このプロジェクトは<a href="CODE_OF_CONDUCT.html">行動規範</a>を設けています。 したがって、このプロジェクトでは参加者にこの行動規範に従うことを求めます。</p>
-</blockquote>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
