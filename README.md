@@ -18,25 +18,38 @@ jpaccidents is package for handling the traffic accident data in Japan.
 This package covers the traffic accident data provided by the [National
 Police Agency of Japan](https://www.npa.go.jp/english/index.html).
 
-> jpaccidentsは日本の交通事故のデータを扱うためのパッケージです。
-> このパッケージでは、[警察庁](https://www.npa.go.jp/index.html)が提供する交通事故データを対象としています。
+jpaccidentsは日本の交通事故のデータを扱うためのパッケージです。
+このパッケージでは、[警察庁](https://www.npa.go.jp/index.html)が提供する交通事故データを対象としています。
 
 ## Installation
 
-You can install the development version of jpaccidents like so:
+You can install the development version of jpaccidents using the
+following methods:
 
-> jpaccidentsの開発版は以下のコマンドからインストールできます。
+jpaccidentsの開発版は以下の方法からインストールできます。
+
+### Using `install.packages()` (R-universe)
 
 ``` r
-install.packages("remotes")
-remotes::install_git("https://github.com/NONONOexe/jpaccidents")
+# Enable the R-universe
+options(repo = c(
+  nononoexe = "https://nonoexe.r-universe.dev",
+  cran = "https://cloud.r-project.org"
+))
+```
+
+### Using `pak`
+
+``` r
+# install.packages("pak")
+pak::pak("NONONOexe/jpaccidents")
 ```
 
 ## Usage
 
 Load the package as follows:
 
-> パッケージを以下のようにして読み込みます。
+パッケージを以下のようにして読み込みます。
 
 ``` r
 library(jpaccidents)
@@ -44,23 +57,25 @@ library(jpaccidents)
 
 The traffic accident data can be used follows:
 
-> 交通事故のデータは次のようにして利用することができます。
+交通事故のデータは次のようにして利用することができます。
 
 ``` r
-downloaded_path <- download_accident_main_data(download_dir = "download-dir-path", year = 2022)
-main_data <- read_accident_main_data(downloaded_path)
+downloaded_path <- download_accident_data(
+  type         = "main",
+  download_dir = "download-dir-path",
+  years        = 2023
+)
+accident_data <- read_accident_data(downloaded_path)
 ```
 
 There are three types of traffic accident data: main (honhyo),
-supplementary (hojyuhyo), and highway (kosokuhyo) data. The package
-provides functions for each of these. Use the function appropriate for
-the data you need. See also `? download_accident_main_data` for more
-information.
+supplementary (hojyuhyo), and highway (kosokuhyo) data. jpaccidents
+provides functions to download specified types of data. It also provides
+functions for importing each data set into into a common schema.
 
-> 交通事故のデータは本票、補充票、高速票の3種類があります。
-> それぞれに対応する関数が用意されています。
-> 必要なデータに応じて利用してください。
-> 詳しくは`? download_accident_main_data`を参照してください。
+交通事故のデータは本票、補充票、高速票の3種類があります。
+jpaccidentsはこれらのデータから指定したものをダウンロードする関数を提供します。
+また、各データを共通スキーマに取り込むための関数を提供します。
 
 ## License
 
@@ -70,10 +85,10 @@ downloaded using this package is provided by the National Police Agency
 of Japan under the [Creative Commons Attribution 4.0 International
 License](https://creativecommons.org/licenses/by/4.0/).
 
-> このパッケージはMITライセンスの下で提供されています。詳細は[LICENSE](LICENSE)ファイルを参照してください。
-> また、本パッケージによりダウンロードできる交通事故データは、警察庁により[クリエイティブ・コモンズ
-> 表示 4.0 国際
-> ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)の下で提供されています。
+このパッケージはMITライセンスの下で提供されています。詳細は[LICENSE](LICENSE)ファイルを参照してください。
+また、本パッケージによりダウンロードできる交通事故データは、警察庁により[クリエイティブ・コモンズ
+表示 4.0 国際
+ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)の下で提供されています。
 
 ## Code of Conduct
 
@@ -81,5 +96,5 @@ Please note that this project is released with a [Contributor Code of
 Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
 to abide by its terms.
 
-> このプロジェクトは[行動規範](CODE_OF_CONDUCT.md)を設けています。
-> したがって、このプロジェクトでは参加者にこの行動規範に従うことを求めます。
+このプロジェクトは[行動規範](CODE_OF_CONDUCT.md)を設けています。
+したがって、このプロジェクトでは参加者にこの行動規範に従うことを求めます。
